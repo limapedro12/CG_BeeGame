@@ -1,10 +1,10 @@
 # CG 2023/2024
 
-## Group T0xG0y
-| Name             | Number    | E-Mail             |
-| ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
-| Jane Doe         | 201901011 | ...                |
+## Group T02G01
+| Name                        | Number    | E-Mail                   |
+| --------------------------- | --------- | ------------------------ |
+| Pedro de Almeida Lima       | 202108806 | up202108806@edu.fe.up.pt |
+| Pedro Simão Januário Vieira | 202108768 | up202108768@edu.fe.up.pt |
 
 ----
 
