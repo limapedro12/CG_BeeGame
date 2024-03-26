@@ -34,6 +34,8 @@ export class MyCilinder extends CGFobject {
 					this.normals.push(Math.cos(i*2*Math.PI/slices), Math.sin(i*2*Math.PI/slices), 0)
 			}
 		}
+		this.vertices.push(Math.cos(slices*2*Math.PI/slices), Math.sin(slices*2*Math.PI/slices), stacks*height);
+		this.vertices.push(Math.cos((slices-1)*2*Math.PI/slices), Math.sin((slices-1)*2*Math.PI/slices), stacks*height);
 	}
 
 	initBuffers() {
