@@ -19,10 +19,10 @@ export class MySphere extends CGFobject {
 	}
 	
 	get_vertices() {
-        for(let stack = 0; stack <= this.stacks; stack++) {
+        for(var stack = 0; stack <= this.stacks; stack++) {
             let delta_alpha = stack * Math.PI / this.stacks;
 
-            for(let slice = 0; slice <= this.slices; slice++) {
+            for(var slice = 0; slice <= this.slices; slice++) {
                 let delta_beta = slice * 2 * Math.PI / this.slices;
 
                 let x = this.radius * Math.cos(delta_beta) * Math.sin(delta_alpha);
@@ -31,11 +31,13 @@ export class MySphere extends CGFobject {
 
                 this.vertices.push(x, y, z);
                 this.normals.push(x, y, z);
+
+                this.texCoords.push(-slice / this.slices, -stack / this.stacks);
             }
         }
 
-        for(let stack = 0; stack < this.stacks; stack++) {
-            for(let slice = 0; slice < this.slices; slice++) {
+        for(var stack = 0; stack < this.stacks; stack++) {
+            for(var slice = 0; slice < this.slices; slice++) {
                 let point1 = (stack * (this.slices + 1)) + slice;
                 let point2 = point1 + this.slices + 1;
 
@@ -49,6 +51,7 @@ export class MySphere extends CGFobject {
 		this.vertices = [];
 		this.indices = [];
 		this.normals = [];
+        this.texCoords = [];
 		this.get_vertices();
 
 		//The defined indices (and corresponding vertices)
