@@ -1,6 +1,6 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
+import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
-import { MySphere } from "./MySphere.js";
 
 /**
  * MyScene
@@ -27,7 +27,7 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
-    this.sphere = new MySphere(this, 30, 10, 1);
+    this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama.jpg"));
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -40,12 +40,6 @@ export class MyScene extends CGFscene {
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
-    
-    this.earthTex = new CGFtexture(this, "images/earth.jpg");
-    this.earthApp = new CGFappearance(this);
-    this.earthApp.setTexture(this.earthTex);
-    this.earthApp.setTextureWrap('REPEAT', 'REPEAT');
-
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -83,9 +77,9 @@ export class MyScene extends CGFscene {
     if (this.displayAxis) this.axis.display();
 
     if (this.displayNormals)
-      this.sphere.enableNormalViz();
+      this.panorama.enableNormalViz();
     else
-      this.sphere.disableNormalViz();
+      this.panorama.disableNormalViz();
 
     // ---- BEGIN Primitive drawing section
 
@@ -97,8 +91,7 @@ export class MyScene extends CGFscene {
     this.plane.display();
     this.popMatrix();
 
-    this.earthApp.apply();
-    this.sphere.display();
+    this.panorama.display();
 
     // ---- END Primitive drawing section
   }

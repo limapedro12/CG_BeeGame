@@ -8,12 +8,14 @@ import {CGFobject} from '../lib/CGF.js';
  * @param radius
  */
 export class MySphere extends CGFobject {
-	constructor(scene, slices, stacks, radius) {
+	constructor(scene, slices, stacks, radius, inverted = false) {
 		super(scene);
 
 		this.slices = slices;
 		this.stacks = stacks;
         this.radius = radius;
+
+        this.inverted = inverted;
 
 		this.initBuffers();
 	}
@@ -30,7 +32,9 @@ export class MySphere extends CGFobject {
                 let z = this.radius * Math.sin(delta_beta) * Math.sin(delta_alpha);
 
                 this.vertices.push(x, y, z);
-                this.normals.push(x, y, z);
+                
+                if (this.inverted) this.normals.push(-x, -y, -z);
+                else this.normals.push(x, y, z);
 
                 this.texCoords.push(-slice / this.slices, -stack / this.stacks);
             }
@@ -41,8 +45,13 @@ export class MySphere extends CGFobject {
                 let point1 = (stack * (this.slices + 1)) + slice;
                 let point2 = point1 + this.slices + 1;
 
-                this.indices.push(point1, point2, point1 + 1);
-                this.indices.push(point2, point2 + 1, point1 + 1);
+                if (this.inverted) {
+                    this.indices.push(point2, point1, point1 + 1);
+                    this.indices.push(point2 + 1, point2, point1 + 1);
+                } else {
+                    this.indices.push(point1, point2, point1 + 1);
+                    this.indices.push(point2, point2 + 1, point1 + 1);
+                }
             }
         }
     }
@@ -63,4 +72,3 @@ export class MySphere extends CGFobject {
 
 	updateBuffers() {}
 }
-
