@@ -32,9 +32,11 @@ export class MySphere extends CGFobject {
                 let z = this.radius * Math.sin(delta_beta) * Math.sin(delta_alpha);
 
                 this.vertices.push(x, y, z);
+
+                let normal_len = Math.sqrt(x**2 + y**2 + z**2);
                 
-                if (this.inverted) this.normals.push(-x, -y, -z);
-                else this.normals.push(x, y, z);
+                if (this.inverted) this.normals.push(-x/normal_len, -y/normal_len, -z/normal_len);
+                else this.normals.push(x/normal_len, y/normal_len, z/normal_len);
 
                 this.texCoords.push(-slice / this.slices, -stack / this.stacks);
             }
