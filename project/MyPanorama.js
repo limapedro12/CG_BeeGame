@@ -28,7 +28,11 @@ export class MyPanorama extends CGFobject {
     disableNormalViz() {this.sphere.disableNormalViz();}
 
     display() {
+        this.scene.pushMatrix();
+        
+        this.scene.translate(this.scene.camera.position[0], this.scene.camera.position[1], this.scene.camera.position[2]);
         this.material.apply();
         this.sphere.display();
+        this.scene.popMatrix();
     }
 }
