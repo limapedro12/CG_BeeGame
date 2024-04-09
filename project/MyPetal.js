@@ -3,22 +3,24 @@ import {CGFobject} from '../lib/CGF.js';
  * MyPetal
  * @constructor
  * @param scene - Reference to MyScene object
+ * @param radius
  */
 export class MyPetal extends CGFobject {
-	constructor(scene) {
+	constructor(scene, radius) {
 		super(scene);
+		this.radius = radius;
 		this.initBuffers();
 	}
 	
 	initBuffers() {
 		this.vertices = [
 			-1, 0, 0,	//0
-			0, -1.5, 0,	//1
-			0, 1.5, 0,	//2
+			0, -this.radius, 0,	//1
+			0, this.radius, 0,	//2
 			1, 0, 0,	//3
 			-1, 0, 0,	//4
-			0, -1.5, 0,	//5
-			0, 1.5, 0,	//6
+			0, -this.radius, 0,	//5
+			0, this.radius, 0,	//6
 			1, 0, 0,	//7
 		];
 

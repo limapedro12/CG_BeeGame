@@ -29,7 +29,7 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama.jpg"));
-    this.flower = new MyFlower(this, 5);
+    this.flower = new MyFlower(this, 10, 10, null, 2, null, 0.25, 8, null, null);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
