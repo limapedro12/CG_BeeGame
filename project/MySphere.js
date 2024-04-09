@@ -21,7 +21,14 @@ export class MySphere extends CGFobject {
 	}
 	
 	get_vertices() {
-        for(var stack = 0; stack <= this.stacks; stack++) {
+        let delta_alpha = stack * Math.PI / this.stacks;
+
+        this.vertices.push(0, -this.radius, 0);
+        if (this.inverted) this.normals.push(0, 1, 0);
+        else this.normals.push(0, -1, 0);
+        this.texCoords.push(0, 0);
+
+        for(var stack = 1; stack <= this.stacks; stack++) {
             let delta_alpha = stack * Math.PI / this.stacks;
 
             for(var slice = 0; slice <= this.slices; slice++) {
@@ -42,10 +49,19 @@ export class MySphere extends CGFobject {
             }
         }
 
-        for(var stack = 0; stack < this.stacks; stack++) {
-            for(var slice = 0; slice < this.slices; slice++) {
+        for(var slice = 1; slice <= this.slices; slice++) {
+            let point = slice;
+            if (this.inverted) {
+                this.indices.push((point + 1), point, 0);
+            } else {
+                this.indices.push(point, (point + 1), 0);
+            }
+        }
+
+        for(var stack = 0; stack < this.stacks - 1; stack++) {
+            for(var slice = 0; slice <= this.slices; slice++) {
                 let point1 = (stack * (this.slices + 1)) + slice;
-                let point2 = point1 + this.slices + 1;
+                let point2 = point1 + this.slices + 2;
 
                 if (this.inverted) {
                     this.indices.push(point2, point1, point1 + 1);
