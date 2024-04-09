@@ -1,4 +1,5 @@
 import {CGFobject} from '../lib/CGF.js';
+import { MyTriangle } from './MyTriangle.js';
 /**
  * MyPetal
  * @constructor
@@ -6,49 +7,33 @@ import {CGFobject} from '../lib/CGF.js';
  * @param radius
  */
 export class MyPetal extends CGFobject {
-	constructor(scene, radius) {
+	constructor(scene, radius, angle) {
 		super(scene);
+		this.scene = scene;
 		this.radius = radius;
-		this.initBuffers();
+		this.angle = angle;
+
+		this.triangle1 = new MyTriangle(scene);
+		this.triangle2 = new MyTriangle(scene);
 	}
 	
-	initBuffers() {
-		this.vertices = [
-			-1, 0, 0,	//0
-			0, -this.radius, 0,	//1
-			0, this.radius, 0,	//2
-			1, 0, 0,	//3
-			-1, 0, 0,	//4
-			0, -this.radius, 0,	//5
-			0, this.radius, 0,	//6
-			1, 0, 0,	//7
-		];
+	display() {
+		this.scene.pushMatrix();
 
-		//Counter-clockwise reference of vertices
-		this.indices = [
-			0, 1, 2,
-			1, 3, 2,
-			5, 4, 6,
-			6, 7, 5
-		];
+		this.scene.rotate(Math.PI/2, 0, 0, 1);
 
-		this.normals = [
-			0, 0, 1,	//0
-			0, 0, 1,	//1
-			0, 0, 1,	//2
-			0, 0, 1,	//3
+		this.scene.pushMatrix();
+		this.scene.scale(this.radius, 1, 1);
+		this.triangle1.display();
+		this.scene.popMatrix();
 
-			0, 0, -1,
-			0, 0, -1,
-			0, 0, -1,
-			0, 0, -1,
-		]
+		this.scene.pushMatrix();
+		this.scene.rotate(this.angle, 0, 1, 0);
+		this.scene.rotate(Math.PI, 0, 1, 0);
+		this.scene.scale(this.radius, 1, 1);
+		this.triangle2.display();
+		this.scene.popMatrix();
 
-		//The defined indices (and corresponding vertices)
-		//will be read in groups of three to draw triangles
-		this.primitiveType = this.scene.gl.TRIANGLES;
-
-		this.initGLBuffers();
+		this.scene.popMatrix();
 	}
 }
-

@@ -27,7 +27,7 @@ import { MyStem } from './MyStem.js';
 export class MyFlower extends CGFobject {
 	constructor(
         scene,
-        exteriorRadius, petalsNo, petalsColor,
+        exteriorRadius, petalsNo, petalsColor, petalsAngleMin, petalsAngleMax,
         receptacleRadius, receptacleColor,
         stemRadius, stemSize, stemColor,
         leavesColor
@@ -36,8 +36,14 @@ export class MyFlower extends CGFobject {
 
         this.petalsRadius = (exteriorRadius - receptacleRadius)/2;
         this.petals = [];
+        this.petalsAngles = [];
         for (var i = 0; i < petalsNo; i++) {
-            this.petals.push(new MyPetal(scene, (exteriorRadius - receptacleRadius)/2));
+            let radius = Math.random() * Math.PI - Math.PI/2;
+            this.petals.push(new MyPetal(scene, (exteriorRadius - receptacleRadius)/2, radius));
+            let angleScope = petalsAngleMax-petalsAngleMin;
+            let angle = Math.random() * angleScope - Math.abs(petalsAngleMin);
+            console.log(angle);
+            this.petalsAngles.push(angle);
         }
 
         this.receptacleRadius = receptacleRadius;
@@ -52,8 +58,8 @@ export class MyFlower extends CGFobject {
 
 	updateBuffers() {}
 
-    enableNormalViz() {this.sphere.enableNormalViz();}
-    disableNormalViz() {this.sphere.disableNormalViz();}
+    enableNormalViz() {}
+    disableNormalViz() {}
 
     display() {
         for (var i = 0; i < this.petals.length; i++) {
@@ -61,7 +67,9 @@ export class MyFlower extends CGFobject {
             let angle = i * 2*Math.PI / this.petals.length;
             this.scene.pushMatrix();
             this.scene.rotate(angle, 0, 0, 1);
-            this.scene.translate(0, this.receptacleRadius + this.petalsRadius, 0);
+            this.scene.translate(0, this.receptacleRadius, 0);
+            this.scene.rotate(this.petalsAngles[i], 1, 0, 0);
+            this.scene.translate(0, this.petalsRadius, 0);
             petal.display();
             this.scene.popMatrix();
         }
