@@ -29,11 +29,18 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama.jpg"));
+    /*
+    scene,
+    exteriorRadius, petalsNo, petalsColor, petalsAngleMin, petalsAngleMax,
+    receptacleRadius, receptacleColor,
+    stemRadius, stemSize, stemColor,
+    leavesColor
+    */
     this.flower = new MyFlower(
       this,
-      6, 3, null, -Math.PI/12, Math.PI/12,
-      2, null,
-      0.25, 8, null,
+      7, 6, null, -Math.PI/12, Math.PI/12,
+      1.5, null,
+      0.5, 5, null,
       null);
 
     //Objects connected to MyInterface

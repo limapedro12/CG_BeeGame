@@ -1,57 +1,82 @@
 import {CGFobject} from '../lib/CGF.js';
+import { MyCilinder } from './MyCilinder.js';
+import { MyLeaf } from './MyLeaf.js';
 /**
  * MyStem
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices 
- * @param stacks 
+ * @param radius
+ * @param nCilinders
  */
 export class MyStem extends CGFobject {
-	constructor(scene, slices, stacks, radius) {
+	constructor(scene, radius, nCilinders) {
 		super(scene);
-
-		this.slices = slices;
-		this.stacks = stacks;
+		this.scene = scene;
 		this.radius = radius;
+		this.nCilinders = nCilinders;
 
-		this.initBuffers();
+		this.cilinders = [];
+        this.cilindersHeights = [];
+        this.cilindersXTrans = [];
+        this.cilindersYTrans = [];
+        for (var i = 0; i < nCilinders; i++) {
+            this.cilinders.push(new MyCilinder(scene, 10, 10, radius));
+            let height = Math.random() * 4 + 1;
+            let xTrans = Math.random() * this.radius/4 - this.radius/4;
+            let yTrans = Math.random() * this.radius/4 - this.radius/4;
+            this.cilindersHeights.push(height);
+            this.cilindersXTrans.push(xTrans);
+            this.cilindersYTrans.push(yTrans);
+        }
+
+        this.leaves = [];
+        this.leavesAngles = [];
+        for (var i = 0; i < nCilinders-1; i++) {
+            let leafStemRadius = Math.random() * 0.1 + 0.1;
+            let leafStemSize = this.radius +(Math.random() * 0.4 + 0.4);
+            let leafRadius = Math.random() * 0.3 + 0.3;
+            let angle = Math.random() * 2*Math.PI; 
+            /* This is the angle with which the leaf's diamond rotates around the leaf's stem axis,
+            not to be confused with the angle that the entire leaf rotates around the flower's stem axis. */
+
+            let leaf = new MyLeaf(scene, leafStemRadius, leafStemSize, leafRadius, angle);
+            let leafAngle = Math.random() * 2*Math.PI;
+
+            this.leaves.push(leaf);
+            this.leavesAngles.push(leafAngle);
+        }
 	}
 	
-	get_vertices(slices, stacks){
-		let height = 1/stacks
-		for(var k = 0; k < stacks; k++){
-			for(var i = 0; i < slices; i++){
-				this.vertices.push(this.radius*Math.cos(i*2*Math.PI/slices), this.radius*Math.sin(i*2*Math.PI/slices), k*height);
-				this.vertices.push(this.radius*Math.cos(i*2*Math.PI/slices), this.radius*Math.sin(i*2*Math.PI/slices), (k+1)*height);
-			}
+	display() {
+        var heightSum = 0;
+        for (var i = 0; i < this.nCilinders; i++) {
+            let cilinder = this.cilinders[i];
+            let height = this.cilindersHeights[i];
+            let xTrans = this.cilindersXTrans[i];
+            let yTrans = this.cilindersYTrans[i];
 
-			for(var i = 0; i < slices; i++){
-				this.indices.push(i*2 + k*2*slices, i*2+2 + k*2*slices, i*2+3 + k*2*slices)
-				this.indices.push(i*2+3 + k*2*slices, i*2+1 + k*2*slices, i*2 + k*2*slices)
-			}
+            this.scene.pushMatrix();
+            this.scene.translate(xTrans, yTrans, heightSum);
+            this.scene.scale(1, 1, height);
+            cilinder.display();
+            this.scene.popMatrix();
 
-			for(var i = 0; i < slices; i++){
-				for(var j = 0; j < 2; j++)
-					this.normals.push(Math.cos(i*2*Math.PI/slices), Math.sin(i*2*Math.PI/slices), 0)
-			}
-		}
-		this.vertices.push(Math.cos(slices*2*Math.PI/slices), Math.sin(slices*2*Math.PI/slices), stacks*height);
-		this.vertices.push(Math.cos((slices-1)*2*Math.PI/slices), Math.sin((slices-1)*2*Math.PI/slices), stacks*height);
+            heightSum += height;
+        }
+
+        heightSum = 0;
+        for (var i = 0; i < this.leaves.length; i++) {
+            let leaf = this.leaves[i];
+            let leafAngle = this.leavesAngles[i];
+            let upperCilinderHeight = this.cilindersHeights[i];
+            heightSum += upperCilinderHeight;
+
+            this.scene.pushMatrix();
+            this.scene.translate(0, 0, heightSum);
+            this.scene.rotate(leafAngle, 0, 0, 1);
+            this.scene.rotate(-Math.PI/2, 1, 0, 0);
+            leaf.display();
+            this.scene.popMatrix();
+        }
 	}
-
-	initBuffers() {
-		this.vertices = [];
-		this.indices = [];
-		this.normals = [];
-		this.get_vertices(this.slices, this.stacks);
-
-		//The defined indices (and corresponding vertices)
-		//will be read in groups of three to draw triangles
-		this.primitiveType = this.scene.gl.TRIANGLES;
-
-		this.initGLBuffers();
-	}
-
-	updateBuffers() {}
 }
-

@@ -11,7 +11,7 @@ import { MyStem } from './MyStem.js';
  */
 
 /*
-    Raio exterior das pétalas
+    Raio exterior da flor
     Número de pétalas
     Côr das pétalas
 
@@ -42,18 +42,13 @@ export class MyFlower extends CGFobject {
             this.petals.push(new MyPetal(scene, (exteriorRadius - receptacleRadius)/2, radius));
             let angleScope = petalsAngleMax-petalsAngleMin;
             let angle = Math.random() * angleScope - Math.abs(petalsAngleMin);
-            console.log(angle);
             this.petalsAngles.push(angle);
         }
 
         this.receptacleRadius = receptacleRadius;
         this.receptacle = new MyReceptacle(scene, 10, 10, receptacleRadius);
 
-        this.stemRadius = stemRadius;
-        this.stems = [];
-        for (var i = 0; i < stemSize; i++) {
-            this.stems.push(new MyStem(scene, 10, 10, stemRadius));
-        }
+        this.stem = new MyStem(scene, stemRadius, stemSize);
 	}
 
 	updateBuffers() {}
@@ -78,13 +73,8 @@ export class MyFlower extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/2, 1, 0, 0);
-        for (var i = 0; i < this.stems.length; i++) {
-            let stem = this.stems[i];
-            this.scene.pushMatrix();
-            this.scene.translate(0, 0, i);
-            stem.display();
-            this.scene.popMatrix();
-        }
+        this.scene.translate(0, 0, this.receptacleRadius-0.5);
+        this.stem.display();
         this.scene.popMatrix();
     }
 }
