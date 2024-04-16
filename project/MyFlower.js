@@ -60,13 +60,15 @@ export class MyFlower extends CGFobject {
         for (var i = 0; i < this.petals.length; i++) {
             let petal = this.petals[i];
             let angle = i * 2*Math.PI / this.petals.length;
-            this.scene.pushMatrix();
-            this.scene.rotate(angle, 0, 0, 1);
-            this.scene.translate(0, this.receptacleRadius, 0);
-            this.scene.rotate(this.petalsAngles[i], 1, 0, 0);
-            this.scene.translate(0, this.petalsRadius, 0);
-            petal.display();
-            this.scene.popMatrix();
+            if (angle != Math.PI) {
+                this.scene.pushMatrix();
+                this.scene.rotate(angle, 0, 0, 1);
+                this.scene.translate(0, this.receptacleRadius, 0);
+                this.scene.rotate(this.petalsAngles[i], 1, 0, 0);
+                this.scene.translate(0, this.petalsRadius, 0);
+                petal.display();
+                this.scene.popMatrix();
+            }
         }
 
         this.receptacle.display();
