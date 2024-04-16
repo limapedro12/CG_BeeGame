@@ -2,6 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyFlower } from "./MyFlower.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
+import { MyRock } from "./MyRock.js"
 
 /**
  * MyScene
@@ -42,6 +43,14 @@ export class MyScene extends CGFscene {
       1.5, null,
       0.5, 5, null,
       null);
+
+    this.rockMaterial = new CGFappearance(this);
+    this.rockMaterial.setAmbient(0, 0, 0, 1.0);
+    this.rockMaterial.setDiffuse(110/255, 110/255, 110/255, 1.0);
+    this.rockMaterial.setSpecular(0.9, 0.9, 0.9, 1.0);
+    this.rockMaterial.setShininess(10.0);
+
+    this.rock = new MyRock(this, 10, 10, 5)
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -106,7 +115,9 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     this.panorama.display();
-    this.flower.display();
+    // this.flower.display();
+    this.rockMaterial.apply();
+    this.rock.display();
 
     // ---- END Primitive drawing section
   }
