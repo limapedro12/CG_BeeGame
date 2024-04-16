@@ -20,23 +20,25 @@ export class MyCilinder extends CGFobject {
 	get_vertices(slices, stacks){
 		let height = 1/stacks;
 		for(var k = 0; k < stacks; k++){
-			for(var i = 0; i < slices; i++){
+			for(var i = 0; i <= slices; i++){
 				this.vertices.push(this.radius*Math.cos(i*2*Math.PI/slices), this.radius*Math.sin(i*2*Math.PI/slices), k*height);
 				this.vertices.push(this.radius*Math.cos(i*2*Math.PI/slices), this.radius*Math.sin(i*2*Math.PI/slices), (k+1)*height);
 			}
+		}
 
-			for(var i = 0; i < slices; i++){
-				this.indices.push(i*2 + k*2*slices, i*2+2 + k*2*slices, i*2+3 + k*2*slices)
-				this.indices.push(i*2+3 + k*2*slices, i*2+1 + k*2*slices, i*2 + k*2*slices)
-			}
-
-			for(var i = 0; i < slices; i++){
-				for(var j = 0; j < 2; j++)
-					this.normals.push(Math.cos(i*2*Math.PI/slices), Math.sin(i*2*Math.PI/slices), 0)
+		for(var k = 0; k <= stacks; k++) {
+			for(var i = 0; i <= slices; i++) {
+				this.indices.push(i*2 + k*2*slices, i*2+2 + k*2*slices, i*2+3 + k*2*slices);
+				this.indices.push(i*2+3 + k*2*slices, i*2+1 + k*2*slices, i*2 + k*2*slices);
 			}
 		}
-		this.vertices.push(Math.cos(slices*2*Math.PI/slices), Math.sin(slices*2*Math.PI/slices), stacks*height);
-		this.vertices.push(Math.cos((slices-1)*2*Math.PI/slices), Math.sin((slices-1)*2*Math.PI/slices), stacks*height);
+
+		for(var k = 0; k < stacks; k++){
+			for(var i = 0; i <= slices; i++){
+				for(var j = 0; j < 2; j++)
+					this.normals.push(Math.cos(i*2*Math.PI/slices), Math.sin(i*2*Math.PI/slices), 0);
+			}
+		}
 	}
 
 	initBuffers() {
