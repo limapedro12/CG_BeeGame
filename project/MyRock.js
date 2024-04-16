@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import { CGFobject, CGFappearance } from '../lib/CGF.js';
 /**
  * MyRock
  * @constructor
@@ -14,6 +14,12 @@ export class MyRock extends CGFobject {
 		this.slices = slices;
 		this.stacks = stacks;
         this.radius = radius;
+
+        this.material = new CGFappearance(this.scene);
+        this.material.setAmbient(0, 0, 0, 1.0);
+        this.material.setDiffuse(110/255, 110/255, 110/255, 1.0);
+        this.material.setSpecular(0.9, 0.9, 0.9, 1.0);
+        this.material.setShininess(10.0);
 
 		this.initBuffers();
 	}
@@ -58,6 +64,10 @@ export class MyRock extends CGFobject {
         }
     }
 
+    getHeight() {
+        return this.radius * 0.5;
+    }
+
 	initBuffers() {
 		this.vertices = [];
 		this.indices = [];
@@ -73,4 +83,12 @@ export class MyRock extends CGFobject {
 	}
 
 	updateBuffers() {}
+
+    display() {
+        this.material.apply();
+        this.scene.pushMatrix();
+        this.scene.scale(1, 0.5, 1);
+        super.display();
+        this.scene.popMatrix();
+    }
 }
