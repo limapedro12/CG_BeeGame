@@ -22,8 +22,8 @@ export class MyStem extends CGFobject {
         for (var i = 0; i < nCilinders; i++) {
             this.cilinders.push(new MyCilinder(scene, 10, 10, radius));
             let height = Math.random() * 4 + 1;
-            let xTrans = Math.random() * this.radius/4 - this.radius/4;
-            let yTrans = Math.random() * this.radius/4 - this.radius/4;
+            let xTrans = Math.random() * this.radius/3 - this.radius/3;
+            let yTrans = Math.random() * this.radius/3 - this.radius/3;
             this.cilindersHeights.push(height);
             this.cilindersXTrans.push(xTrans);
             this.cilindersYTrans.push(yTrans);
