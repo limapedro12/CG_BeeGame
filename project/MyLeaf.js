@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import {CGFobject, CGFtexture, CGFappearance} from '../lib/CGF.js';
 import { MyPetal } from './MyPetal.js';
 import { MyCilinder } from './MyCilinder.js';
 /**
@@ -20,7 +20,7 @@ export class MyLeaf extends CGFobject {
         this.leafAngle = leafAngle;
         
         this.stem = new MyCilinder(scene, 10, 10, stemRadius);
-        this.leaf = new MyPetal(scene, leafRadius, 0);
+        this.leaf = new MyPetal(scene, leafRadius, 0, "leaf");
 	}
 	
 	display() {

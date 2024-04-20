@@ -98,7 +98,7 @@ export class MyScene extends CGFscene {
     this.panorama.display();
 
     this.pushMatrix();
-    this.translate(50,-100+this.garden.maxHeight,0);
+    //this.translate(50,-100+this.garden.maxHeight,0);
     this.garden.setLines(this.gardenLins);
     this.garden.setCols(this.gardenCols);
     this.garden.display();
