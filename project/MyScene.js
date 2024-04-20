@@ -58,6 +58,9 @@ export class MyScene extends CGFscene {
 
     this.texture = new CGFtexture(this, "images/terrain.jpg");
     this.appearance = new CGFappearance(this);
+    this.appearance.setAmbient(1, 1, 1, 1.0);
+    this.appearance.setDiffuse(1, 1, 1, 1.0);
+    this.appearance.setSpecular(0.2, 0.2, 0.2, 1.0);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
   }
@@ -115,7 +118,7 @@ export class MyScene extends CGFscene {
     // this.flower.display();
 
     this.pushMatrix();
-    // this.translate(0, -100 + this.rock.height, 0);
+    this.translate(0, -100, 0);
     // this.rock.display();
     this.rockset.display()
     this.popMatrix();
