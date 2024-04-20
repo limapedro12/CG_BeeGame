@@ -3,6 +3,7 @@ import { MyFlower } from "./MyFlower.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MyRock } from "./MyRock.js"
+import { MyRockSet } from "./MyRoockSet.js";
 
 /**
  * MyScene
@@ -44,7 +45,9 @@ export class MyScene extends CGFscene {
       0.5, 5, null,
       null);
 
-    this.rock = new MyRock(this, 10, 10, 5)
+    this.rock = new MyRock(this, 5)
+    this.rockset = new MyRockSet(this, 5, 5)
+    
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -112,8 +115,9 @@ export class MyScene extends CGFscene {
     // this.flower.display();
 
     this.pushMatrix();
-    this.translate(0, -100 + this.rock.getHeight(), 0);
-    this.rock.display();
+    // this.translate(0, -100 + this.rock.height, 0);
+    // this.rock.display();
+    this.rockset.display()
     this.popMatrix();
 
     // ---- END Primitive drawing section

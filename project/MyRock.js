@@ -8,17 +8,19 @@ import { CGFobject, CGFappearance } from '../lib/CGF.js';
  * @param radius
  */
 export class MyRock extends CGFobject {
-	constructor(scene, slices, stacks, radius) {
+	constructor(scene, radius) {
 		super(scene);
 
-		this.slices = slices;
-		this.stacks = stacks;
+		this.slices = 10;
+		this.stacks = 10;
         this.radius = radius;
 
+        this.height_factor = Math.random() * 0.5 + 0.2;
+
         this.material = new CGFappearance(this.scene);
-        this.material.setAmbient(0, 0, 0, 1.0);
-        this.material.setDiffuse(110/255, 110/255, 110/255, 1.0);
-        this.material.setSpecular(0.9, 0.9, 0.9, 1.0);
+        this.material.setAmbient(0.8, 0.8, 0.8, 1.0);
+        this.material.setDiffuse(0.5, 0.5, 0.5, 1.0);
+        this.material.setSpecular(0.2, 0.2, 0.2, 1.0);
         this.material.setShininess(10.0);
 
 		this.initBuffers();
@@ -64,10 +66,6 @@ export class MyRock extends CGFobject {
         }
     }
 
-    getHeight() {
-        return this.radius * 0.5;
-    }
-
 	initBuffers() {
 		this.vertices = [];
 		this.indices = [];
@@ -84,10 +82,14 @@ export class MyRock extends CGFobject {
 
 	updateBuffers() {}
 
+    height() {
+        return (this.vertices[this.vertices.length - 2] - this.vertices[1]) * this.height_factor;
+    }
+
     display() {
         this.material.apply();
         this.scene.pushMatrix();
-        this.scene.scale(1, 0.5, 1);
+        this.scene.scale(1, this.height_factor, 1);
         super.display();
         this.scene.popMatrix();
     }
