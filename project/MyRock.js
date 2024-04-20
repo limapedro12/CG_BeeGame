@@ -18,8 +18,8 @@ export class MyRock extends CGFobject {
         this.height_factor = Math.random() * 0.5 + 0.2;
 
         this.material = new CGFappearance(this.scene);
-        this.material.setAmbient(0.8, 0.8, 0.8, 1.0);
-        this.material.setDiffuse(0.5, 0.5, 0.5, 1.0);
+        this.material.setAmbient(0.2, 0.2, 0.2, 1.0);
+        this.material.setDiffuse(0.3, 0.3, 0.3, 1.0);
         this.material.setSpecular(0.2, 0.2, 0.2, 1.0);
         this.material.setShininess(10.0);
 
