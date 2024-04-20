@@ -14,6 +14,7 @@ export class MyStem extends CGFobject {
 		this.scene = scene;
 		this.radius = radius;
 		this.nCilinders = nCilinders;
+        this.height = 0;
 
 		this.cilinders = [];
         this.cilindersHeights = [];
@@ -25,6 +26,7 @@ export class MyStem extends CGFobject {
             let xTrans = Math.random() * this.radius/3 - this.radius/3;
             let yTrans = Math.random() * this.radius/3 - this.radius/3;
             this.cilindersHeights.push(height);
+            this.height += height;
             this.cilindersXTrans.push(xTrans);
             this.cilindersYTrans.push(yTrans);
         }
