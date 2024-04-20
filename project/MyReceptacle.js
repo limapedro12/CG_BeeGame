@@ -37,6 +37,8 @@ export class MyReceptacle extends CGFobject {
                 
                 if (this.inverted) this.normals.push(-x/normal_len, -y/normal_len, -z/normal_len);
                 else this.normals.push(x/normal_len, y/normal_len, z/normal_len);
+                
+                this.texCoords.push(-slice / this.slices, -stack / this.stacks);
             }
         }
 
@@ -60,6 +62,7 @@ export class MyReceptacle extends CGFobject {
 		this.vertices = [];
 		this.indices = [];
 		this.normals = [];
+        this.texCoords = [];
 		this.get_vertices();
 
 		//The defined indices (and corresponding vertices)

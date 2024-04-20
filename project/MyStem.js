@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import {CGFobject, CGFtexture, CGFappearance} from '../lib/CGF.js';
 import { MyCilinder } from './MyCilinder.js';
 import { MyLeaf } from './MyLeaf.js';
 /**
@@ -15,6 +15,11 @@ export class MyStem extends CGFobject {
 		this.radius = radius;
 		this.nCilinders = nCilinders;
         this.height = 0;
+		
+		this.texture = new CGFtexture(this.scene, "images/stem.png");
+		this.appearance = new CGFappearance(this.scene);
+		this.appearance.setTexture(this.texture);
+		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.cilinders = [];
         this.cilindersHeights = [];
@@ -60,6 +65,7 @@ export class MyStem extends CGFobject {
             this.scene.pushMatrix();
             this.scene.translate(xTrans, yTrans, heightSum);
             this.scene.scale(1, 1, height);
+            this.appearance.apply();
             cilinder.display();
             this.scene.popMatrix();
 

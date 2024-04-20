@@ -1,4 +1,4 @@
-import {CGFappearance, CGFobject} from '../lib/CGF.js';
+import {CGFappearance, CGFobject, CGFtexture} from '../lib/CGF.js';
 import { MyPetal } from './MyPetal.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyStem } from './MyStem.js';
@@ -49,6 +49,11 @@ export class MyFlower extends CGFobject {
         this.receptacle = new MyReceptacle(scene, 10, 10, receptacleRadius);
 
         this.stem = new MyStem(scene, stemRadius, stemSize);
+		
+		this.receptacleTexture = new CGFtexture(this.scene, "images/earth.jpg");
+		this.receptacleAppearance = new CGFappearance(this.scene);
+		this.receptacleAppearance.setTexture(this.receptacleTexture);
+		this.receptacleAppearance.setTextureWrap('REPEAT', 'REPEAT');
 	}
 
 	updateBuffers() {}
@@ -71,7 +76,10 @@ export class MyFlower extends CGFobject {
             }
         }
 
+        this.scene.pushMatrix();
+        this.receptacleAppearance.apply();
         this.receptacle.display();
+        this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/2, 1, 0, 0);

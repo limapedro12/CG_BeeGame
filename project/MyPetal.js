@@ -35,6 +35,7 @@ export class MyPetal extends CGFobject {
 		this.scene.popMatrix();
 
 		this.scene.pushMatrix();
+		this.appearance.apply();
 		this.scene.rotate(this.angle, 0, 1, 0);
 		this.scene.rotate(Math.PI, 0, 1, 0);
 		this.scene.scale(this.radius, 1, 1);
