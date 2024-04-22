@@ -19,7 +19,7 @@ export class MyRockSet extends CGFobject {
 
         this.scales = []
         for( var i = 0; i < numRocks; i++) {
-            this.scales.push(Math.random() * 0.5 + 0.5);
+            this.scales.push(Math.random() * 0.3 + 0.7);
         }
 
         this.cumulative_heights = []
@@ -71,9 +71,14 @@ export class MyRockSet extends CGFobject {
                 angle1 = 0
                 angle2 = 0
             } else {
-                this.cumulative_heights[i] = (this.cumulative_heights[i1]+this.cumulative_heights[i2]+ 
-                                              this.cumulative_heights[i3]+this.cumulative_heights[i4])/4 +
-                                              Math.sqrt(this.rocks[i].height()*2+ 2) 
+                let cumulative_mean = (this.cumulative_heights[i1]+this.cumulative_heights[i2]+ 
+                                       this.cumulative_heights[i3]+this.cumulative_heights[i4]) / 4
+                let cumulative_min = Math.min.apply(null, [this.cumulative_heights[i1],this.cumulative_heights[i2],
+                                              this.cumulative_heights[i3],this.cumulative_heights[i4]])
+                let rock_height_mean = (this.rocks[i1].height() + this.rocks[i2].height() +
+                                        this.rocks[i3].height() + this.rocks[i4].height())/4
+                let bias = 1/((rock_height_mean/this.rocks[i].height() + 1))
+                this.cumulative_heights[i] = cumulative_mean + this.rocks[i].height() - bias*(rock_height_mean/2)
 
             // Math.min.apply(null, 
             // [this.cumulative_heights[i1], this.cumulative_heights[i2], 
@@ -94,15 +99,18 @@ export class MyRockSet extends CGFobject {
                 }
             }
 
-            let x_to_draw = x*this.radius*1.5 + (this.numLevels-level) * (this.radius)
-            let y_to_draw =  this.cumulative_heights[i] - this.rocks[i].height()*0.5
-            let z_to_draw = y*this.radius*1.5 + z * (this.radius)
+            let x_to_draw = x*this.radius*1.5 + z*(this.radius)*0.75
+            let y_to_draw = this.cumulative_heights[i] - this.rocks[i].height()*0.5
+            let z_to_draw = y*this.radius*1.5 + z * (this.radius)*0.75
 
             this.scene.pushMatrix();
 
             this.scene.translate(x_to_draw, y_to_draw, z_to_draw);
-            if(level > 1)
+            if(level > 1) {
                 this.scene.rotate(angle1, angle1, 0, angle2);
+            } else {
+                this.scene.rotate(angle1/2, angle1/2, 0, angle2);
+            }
             // console.log("This is rock number " + i + " and it is at " + x+ " " + y + " " + level + ", below me there is rock " + this.rock_at(x, y, (this.numLevels-level)-1))
             this.scene.scale(this.scales[i], this.scales[i], this.scales[i]);
             this.rocks[i].display();

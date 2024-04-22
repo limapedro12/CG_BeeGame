@@ -46,7 +46,7 @@ export class MyScene extends CGFscene {
       null);
 
     this.rock = new MyRock(this, 5)
-    this.rockset = new MyRockSet(this, 14, 5)
+    this.rockset = new MyRockSet(this, 55, 5)
     
 
     //Objects connected to MyInterface
