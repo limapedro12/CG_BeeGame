@@ -73,19 +73,11 @@ export class MyRockSet extends CGFobject {
             } else {
                 let cumulative_mean = (this.cumulative_heights[i1]+this.cumulative_heights[i2]+ 
                                        this.cumulative_heights[i3]+this.cumulative_heights[i4]) / 4
-                let cumulative_min = Math.min.apply(null, [this.cumulative_heights[i1],this.cumulative_heights[i2],
-                                              this.cumulative_heights[i3],this.cumulative_heights[i4]])
                 let rock_height_mean = (this.rocks[i1].height() + this.rocks[i2].height() +
                                         this.rocks[i3].height() + this.rocks[i4].height())/4
                 let bias = 1/((rock_height_mean/this.rocks[i].height() + 1))
                 this.cumulative_heights[i] = cumulative_mean + this.rocks[i].height() - bias*(rock_height_mean/2)
 
-            // Math.min.apply(null, 
-            // [this.cumulative_heights[i1], this.cumulative_heights[i2], 
-            //     this.cumulative_heights[i3], this.cumulative_heights[i4]]) +
-            //     this.rocks[i].height() 
-            // (this.cumulative_heights[i1]+this.cumulative_heights[i2]+ 
-            //     this.cumulative_heights[i3]+this.cumulative_heights[i4])/4
                 let angle12 = this.angle_from_heights(this.rocks[i1].height(), this.rocks[i2].height())
                 let angle13 = this.angle_from_heights(this.rocks[i1].height(), this.rocks[i3].height())
                 let angle42 = this.angle_from_heights(this.rocks[i4].height(), this.rocks[i2].height())
@@ -111,7 +103,6 @@ export class MyRockSet extends CGFobject {
             } else {
                 this.scene.rotate(angle1/2, angle1/2, 0, angle2);
             }
-            // console.log("This is rock number " + i + " and it is at " + x+ " " + y + " " + level + ", below me there is rock " + this.rock_at(x, y, (this.numLevels-level)-1))
             this.scene.scale(this.scales[i], this.scales[i], this.scales[i]);
             this.rocks[i].display();
             this.scene.popMatrix();
