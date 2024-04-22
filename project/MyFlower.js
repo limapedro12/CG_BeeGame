@@ -49,8 +49,13 @@ export class MyFlower extends CGFobject {
         this.receptacle = new MyReceptacle(scene, 10, 10, receptacleRadius);
 
         this.stem = new MyStem(scene, stemRadius, stemSize);
+
+        this.petalTexture = new CGFtexture(this.scene, "images/petal.jpg");
+		this.petalAppearance = new CGFappearance(this.scene);
+		this.petalAppearance.setTexture(this.petalTexture);
+		this.petalAppearance.setTextureWrap('REPEAT', 'REPEAT');
 		
-		this.receptacleTexture = new CGFtexture(this.scene, "images/earth.jpg");
+		this.receptacleTexture = new CGFtexture(this.scene, "images/earth.jpg");    // ALTERAR!
 		this.receptacleAppearance = new CGFappearance(this.scene);
 		this.receptacleAppearance.setTexture(this.receptacleTexture);
 		this.receptacleAppearance.setTextureWrap('REPEAT', 'REPEAT');
@@ -71,6 +76,7 @@ export class MyFlower extends CGFobject {
                 this.scene.translate(0, this.receptacleRadius, 0);
                 this.scene.rotate(this.petalsAngles[i], 1, 0, 0);
                 this.scene.translate(0, this.petalsRadius, 0);
+                this.petalAppearance.apply();
                 petal.display();
                 this.scene.popMatrix();
             }
@@ -84,6 +90,7 @@ export class MyFlower extends CGFobject {
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.scene.translate(0, 0, this.receptacleRadius-0.5);
+        // MyStem is a complex object with many textures, so it will take care of applying them.
         this.stem.display();
         this.scene.popMatrix();
     }

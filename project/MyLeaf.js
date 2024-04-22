@@ -20,7 +20,7 @@ export class MyLeaf extends CGFobject {
         this.leafAngle = leafAngle;
         
         this.stem = new MyCilinder(scene, 10, 10, stemRadius);
-        this.leaf = new MyPetal(scene, leafRadius, 0, "leaf");
+        this.leaf = new MyPetal(scene, leafRadius, 0);
 	}
 	
 	display() {
