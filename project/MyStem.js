@@ -16,7 +16,7 @@ export class MyStem extends CGFobject {
 		this.nCilinders = nCilinders;
         this.height = 0;
 		
-		this.mainTexture = new CGFtexture(this.scene, "images/stem.png");
+		this.mainTexture = new CGFtexture(this.scene, "images/stem.jpg");
 		this.mainAppearance = new CGFappearance(this.scene);
 		this.mainAppearance.setTexture(this.mainTexture);
 		this.mainAppearance.setTextureWrap('REPEAT', 'REPEAT');
