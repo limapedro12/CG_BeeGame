@@ -46,7 +46,7 @@ export class MyScene extends CGFscene {
       null);
 
     this.rock = new MyRock(this, 5)
-    this.rockset = new MyRockSet(this, 5, 5)
+    this.rockset = new MyRockSet(this, 14, 5)
     
 
     //Objects connected to MyInterface
@@ -119,8 +119,8 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     // this.translate(0, -100, 0);
-    this.rock.display();
-    // this.rockset.display()
+    // this.rock.display();
+    this.rockset.display()
     this.popMatrix();
 
     // ---- END Primitive drawing section
