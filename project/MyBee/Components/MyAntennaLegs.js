@@ -2,11 +2,11 @@ import { CGFappearance, CGFobject, CGFtexture } from '../../../lib/CGF.js';
 import { MySphere } from '../../MySphere.js';
 
 /**
- * MyAntenna
+ * MyAntennaLegs
  * @constructor
  * @param size
  */
-export class MyAntenna extends CGFobject {
+export class MyAntennaLegs extends CGFobject {
 	constructor(scene, height) {
 		super(scene);
         this.scene = scene;

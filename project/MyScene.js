@@ -125,28 +125,28 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    this.pushMatrix();
-    this.appearance.apply();
-    this.translate(0,-75,0);
-    this.scale(400,400,400);
-    this.rotate(-Math.PI/2.0,1,0,0);
-    this.plane.display();
-    this.popMatrix();
+    // this.pushMatrix();
+    // this.appearance.apply();
+    // this.translate(0,-75,0);
+    // this.scale(400,400,400);
+    // this.rotate(-Math.PI/2.0,1,0,0);
+    // this.plane.display();
+    // this.popMatrix();
 
     this.panorama.display();
 
-    this.pushMatrix();
-    this.translate(25, -75, -50);
-    this.rockset.display();
-    this.popMatrix();
+    // this.pushMatrix();
+    // this.translate(25, -75, -50);
+    // this.rockset.display();
+    // this.popMatrix();
 
 
-    this.pushMatrix();
-    this.translate(40,-75+this.garden.maxHeight,0);
-    this.garden.setLines(this.gardenLins);
-    this.garden.setCols(this.gardenCols);
-    this.garden.display();
-    this.popMatrix();
+    // this.pushMatrix();
+    // this.translate(40,-75+this.garden.maxHeight,0);
+    // this.garden.setLines(this.gardenLins);
+    // this.garden.setCols(this.gardenCols);
+    // this.garden.display();
+    // this.popMatrix();
 
     this.pushMatrix();
     // this.translate(0, -70 + this.bee.height/2, 0);

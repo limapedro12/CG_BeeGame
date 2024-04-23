@@ -1,6 +1,6 @@
 import { CGFappearance, CGFobject, CGFtexture } from '../../../lib/CGF.js';
 import { MySphere } from '../../MySphere.js';
-import { MyAntenna } from './MyAntenna.js';
+import { MyAntennaLegs } from './MyAntennaLegs.js';
 
 /**
  * MyHead
@@ -27,8 +27,8 @@ export class MyHead extends CGFobject {
         this.eye1 = new MySphere(scene, 16, 8, height/5);
         this.eye2 = new MySphere(scene, 16, 8, height/5);
 
-        this.antenna1 = new MyAntenna(scene, height);
-        this.antenna2 = new MyAntenna(scene, height);
+        this.antenna1 = new MyAntennaLegs(scene, height);
+        this.antenna2 = new MyAntennaLegs(scene, height);
 
 		this.initBuffers();
 	}
