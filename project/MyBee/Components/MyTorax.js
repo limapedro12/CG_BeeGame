@@ -1,6 +1,7 @@
 import { CGFappearance, CGFobject, CGFtexture } from '../../../lib/CGF.js';
 import { MySphere } from '../../MySphere.js';
 import { MyAntennaLegs } from './MyAntennaLegs.js';
+import { MyWing } from './MyWing.js';
 
 /**
  * MyTorax
@@ -23,6 +24,9 @@ export class MyTorax extends CGFobject {
         this.leg2 = new MyAntennaLegs(scene, height/2);
         this.leg3 = new MyAntennaLegs(scene, height/2);
         this.leg4 = new MyAntennaLegs(scene, height/2);
+
+        this.leftWing = new MyWing(scene);
+        this.rightWing = new MyWing(scene);
 
 		this.initBuffers();
 	}
@@ -65,6 +69,20 @@ export class MyTorax extends CGFobject {
         this.scene.rotate(-Math.PI/2, 0, 1, 0);
         this.scene.scale(0.5, 0.5, 0.5);
         this.leg4.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0.8*this.height, this.height/3, 0);
+        this.scene.rotate(Math.PI/2, 0, 0, 1);
+        this.scene.rotate(Math.PI/2, 0, 1, 0);
+        this.leftWing.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(-0.8*this.height, this.height/3, 0);
+        this.scene.rotate(Math.PI/2, 0, 0, 1);
+        this.scene.rotate(Math.PI/2, 0, 1, 0);
+        this.rightWing.display();
         this.scene.popMatrix();
     }
 }

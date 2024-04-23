@@ -2,7 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyGarden } from "./MyGarden.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
-import { MyRockSet } from "./MyRoockSet.js";
+import { MyRockSet } from "./MyRockSet.js";
 import { MyBee } from "./MyBee/MyBee.js";
 
 /*
@@ -51,22 +51,21 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
+    this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+    this.gl.enable(this.gl.BLEND);
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.plane = new MyPlane(this,30);
+    this.plane = new MyPlane(this, 30);
     this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama.jpg"));
     this.garden = new MyGarden(this, 5, 5);
-
-    this.rockset = new MyRockSet(this, 55, 5)
-
+    this.rockset = new MyRockSet(this, 55, 5);
     this.bee = new MyBee(this, 4);
-    
 
     //Objects connected to MyInterface
-    this.displayAxis = true;
-    this.scaleFactor = 1;
-    this.displayNormals = false;
+    this.displayAxis = false;
+    // this.scaleFactor = 1;
+    // this.displayNormals = false;
     this.gardenLins = 5;
     this.gardenCols = 5;
 
@@ -125,31 +124,31 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    // this.pushMatrix();
-    // this.appearance.apply();
-    // this.translate(0,-75,0);
-    // this.scale(400,400,400);
-    // this.rotate(-Math.PI/2.0,1,0,0);
-    // this.plane.display();
-    // this.popMatrix();
+    this.pushMatrix();
+    this.appearance.apply();
+    this.translate(0,-75,0);
+    this.scale(400,400,400);
+    this.rotate(-Math.PI/2.0,1,0,0);
+    this.plane.display();
+    this.popMatrix();
 
     this.panorama.display();
 
-    // this.pushMatrix();
-    // this.translate(25, -75, -50);
-    // this.rockset.display();
-    // this.popMatrix();
-
-
-    // this.pushMatrix();
-    // this.translate(40,-75+this.garden.maxHeight,0);
-    // this.garden.setLines(this.gardenLins);
-    // this.garden.setCols(this.gardenCols);
-    // this.garden.display();
-    // this.popMatrix();
+    this.pushMatrix();
+    this.translate(25, -75, -50);
+    this.rockset.display();
+    this.popMatrix();
 
     this.pushMatrix();
-    // this.translate(0, -70 + this.bee.height/2, 0);
+    this.translate(40,-75+this.garden.maxHeight,0);
+    this.garden.setLines(this.gardenLins);
+    this.garden.setCols(this.gardenCols);
+    this.garden.display();
+    this.popMatrix();
+
+    // The bee should be the last element to be drawn!
+    this.pushMatrix();
+    this.translate(0, -70 + this.bee.height/2, 0);
     this.translate(0, this.bee.deltaPosZ, 0);
     this.bee.display();
     this.popMatrix();

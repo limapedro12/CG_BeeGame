@@ -21,9 +21,9 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
 
         //Slider element in GUI
-        this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
+        // this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
 
-        this.gui.add(this.scene, 'displayNormals').name("Display normals");
+        // this.gui.add(this.scene, 'displayNormals').name("Display normals");
 
         // Controls garden dimension
         this.gui.add(this.scene, 'gardenLins', [1, 2, 3, 4, 5]).name('Garden lines');
