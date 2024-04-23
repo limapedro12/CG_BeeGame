@@ -2,8 +2,8 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyGarden } from "./MyGarden.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
-import { MyRock } from "./MyRock.js"
 import { MyRockSet } from "./MyRoockSet.js";
+import { MyBee } from "./MyBee.js";
 
 /*
 .setUpdatePedtiod(50)
@@ -42,6 +42,8 @@ export class MyScene extends CGFscene {
     this.initCameras();
     this.initLights();
 
+    this.setUpdatePeriod(50);
+
     //Background color
     this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
@@ -57,6 +59,8 @@ export class MyScene extends CGFscene {
     this.garden = new MyGarden(this, 5, 5);
 
     this.rockset = new MyRockSet(this, 55, 5)
+
+    this.bee = new MyBee(this, 4);
     
 
     //Objects connected to MyInterface
@@ -96,6 +100,9 @@ export class MyScene extends CGFscene {
     this.setDiffuse(0.2, 0.4, 0.8, 1.0);
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
+  }
+  update(t) {
+    this.bee.update(t);
   }
   display() {
     // ---- BEGIN Background, camera and axis setup
@@ -139,6 +146,12 @@ export class MyScene extends CGFscene {
     this.garden.setLines(this.gardenLins);
     this.garden.setCols(this.gardenCols);
     this.garden.display();
+    this.popMatrix();
+
+    this.pushMatrix();
+    this.translate(0, -72 + this.bee.height/2, 0);
+    this.translate(0, this.bee.deltaPosZ, 0);
+    this.bee.display();
     this.popMatrix();
 
     // ---- END Primitive drawing section
