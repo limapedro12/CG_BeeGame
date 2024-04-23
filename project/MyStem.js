@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import {CGFobject, CGFtexture, CGFappearance} from '../lib/CGF.js';
 import { MyCilinder } from './MyCilinder.js';
 import { MyLeaf } from './MyLeaf.js';
 /**
@@ -14,17 +14,36 @@ export class MyStem extends CGFobject {
 		this.scene = scene;
 		this.radius = radius;
 		this.nCilinders = nCilinders;
+        this.height = 0;
+		
+		this.mainTexture = new CGFtexture(this.scene, "images/stem.jpg");
+		this.mainAppearance = new CGFappearance(this.scene);
+        this.mainAppearance.setAmbient(1, 1, 1, 1.0);
+        this.mainAppearance.setDiffuse(1, 1, 1, 1.0);
+        this.mainAppearance.setSpecular(0.2, 0.2, 0.2, 1.0);
+		this.mainAppearance.setTexture(this.mainTexture);
+		this.mainAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.leafTexture = new CGFtexture(this.scene, "images/leaf.jpg");
+		this.leafAppearance = new CGFappearance(this.scene);
+        this.leafAppearance.setAmbient(1, 1, 1, 1.0);
+        this.leafAppearance.setDiffuse(1, 1, 1, 1.0);
+        this.leafAppearance.setSpecular(0.2, 0.2, 0.2, 1.0);
+		this.leafAppearance.setTexture(this.leafTexture);
+		this.leafAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.cilinders = [];
         this.cilindersHeights = [];
         this.cilindersXTrans = [];
         this.cilindersYTrans = [];
+
         for (var i = 0; i < nCilinders; i++) {
             this.cilinders.push(new MyCilinder(scene, 10, 10, radius));
             let height = Math.random() * 4 + 1;
-            let xTrans = Math.random() * this.radius/4 - this.radius/4;
-            let yTrans = Math.random() * this.radius/4 - this.radius/4;
+            let xTrans = Math.random() * this.radius/3 - this.radius/3;
+            let yTrans = Math.random() * this.radius/3 - this.radius/3;
             this.cilindersHeights.push(height);
+            this.height += height;
             this.cilindersXTrans.push(xTrans);
             this.cilindersYTrans.push(yTrans);
         }
@@ -58,6 +77,7 @@ export class MyStem extends CGFobject {
             this.scene.pushMatrix();
             this.scene.translate(xTrans, yTrans, heightSum);
             this.scene.scale(1, 1, height);
+            this.mainAppearance.apply();
             cilinder.display();
             this.scene.popMatrix();
 
@@ -75,6 +95,7 @@ export class MyStem extends CGFobject {
             this.scene.translate(0, 0, heightSum);
             this.scene.rotate(leafAngle, 0, 0, 1);
             this.scene.rotate(-Math.PI/2, 1, 0, 0);
+            this.leafAppearance.apply();
             leaf.display();
             this.scene.popMatrix();
         }

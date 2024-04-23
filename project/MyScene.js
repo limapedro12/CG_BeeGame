@@ -1,5 +1,5 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
-import { MyFlower } from "./MyFlower.js";
+import { MyGarden } from "./MyGarden.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MyRock } from "./MyRock.js"
@@ -54,21 +54,8 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama.jpg"));
-    /*
-    scene,
-    exteriorRadius, petalsNo, petalsColor, petalsAngleMin, petalsAngleMax,
-    receptacleRadius, receptacleColor,
-    stemRadius, stemSize, stemColor,
-    leavesColor
-    */
-    this.flower = new MyFlower(
-      this,
-      7, 6, null, -Math.PI/12, Math.PI/12,
-      1.5, null,
-      0.5, 5, null,
-      null);
+    this.garden = new MyGarden(this, 5, 5);
 
-    this.rock = new MyRock(this, 5)
     this.rockset = new MyRockSet(this, 140, 5)
     
 
@@ -76,6 +63,8 @@ export class MyScene extends CGFscene {
     this.displayAxis = true;
     this.scaleFactor = 1;
     this.displayNormals = false;
+    this.gardenLins = 5;
+    this.gardenCols = 5;
 
     this.enableTextures(true);
 
@@ -98,7 +87,7 @@ export class MyScene extends CGFscene {
       1.0,
       0.1,
       1000,
-      vec3.fromValues(50, 10, 15),
+      vec3.fromValues(50, 0, 15),
       vec3.fromValues(0, 0, 0)
     );
   }
@@ -131,19 +120,25 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     this.appearance.apply();
-    this.translate(0,-100,0);
+    this.translate(0,-75,0);
     this.scale(400,400,400);
     this.rotate(-Math.PI/2.0,1,0,0);
     this.plane.display();
     this.popMatrix();
 
     this.panorama.display();
-    // this.flower.display();
 
     this.pushMatrix();
     this.translate(0, -100, 0);
-    // this.rock.display();
-    this.rockset.display()
+    this.rockset.display();
+    this.popMatrix();
+
+
+    this.pushMatrix();
+    this.translate(40,-75+this.garden.maxHeight,0);
+    this.garden.setLines(this.gardenLins);
+    this.garden.setCols(this.gardenCols);
+    this.garden.display();
     this.popMatrix();
 
     // ---- END Primitive drawing section

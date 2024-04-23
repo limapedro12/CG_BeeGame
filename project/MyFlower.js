@@ -1,4 +1,4 @@
-import {CGFappearance, CGFobject} from '../lib/CGF.js';
+import {CGFappearance, CGFobject, CGFtexture} from '../lib/CGF.js';
 import { MyPetal } from './MyPetal.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyStem } from './MyStem.js';
@@ -49,6 +49,22 @@ export class MyFlower extends CGFobject {
         this.receptacle = new MyReceptacle(scene, 10, 10, receptacleRadius);
 
         this.stem = new MyStem(scene, stemRadius, stemSize);
+
+        this.petalTexture = new CGFtexture(this.scene, "images/petal.jpg");
+		this.petalAppearance = new CGFappearance(this.scene);
+        this.petalAppearance.setAmbient(1, 1, 1, 1.0);
+        this.petalAppearance.setDiffuse(1, 1, 1, 1.0);
+        this.petalAppearance.setSpecular(0.2, 0.2, 0.2, 1.0);
+		this.petalAppearance.setTexture(this.petalTexture);
+		this.petalAppearance.setTextureWrap('REPEAT', 'REPEAT');
+		
+		this.receptacleTexture = new CGFtexture(this.scene, "images/receptacle.jpg");
+		this.receptacleAppearance = new CGFappearance(this.scene);
+        this.receptacleAppearance.setAmbient(1, 1, 1, 1.0);
+        this.receptacleAppearance.setDiffuse(1, 1, 1, 1.0);
+        this.receptacleAppearance.setSpecular(0.2, 0.2, 0.2, 1.0);
+		this.receptacleAppearance.setTexture(this.receptacleTexture);
+		this.receptacleAppearance.setTextureWrap('REPEAT', 'REPEAT');
 	}
 
 	updateBuffers() {}
@@ -60,20 +76,28 @@ export class MyFlower extends CGFobject {
         for (var i = 0; i < this.petals.length; i++) {
             let petal = this.petals[i];
             let angle = i * 2*Math.PI / this.petals.length;
-            this.scene.pushMatrix();
-            this.scene.rotate(angle, 0, 0, 1);
-            this.scene.translate(0, this.receptacleRadius, 0);
-            this.scene.rotate(this.petalsAngles[i], 1, 0, 0);
-            this.scene.translate(0, this.petalsRadius, 0);
-            petal.display();
-            this.scene.popMatrix();
+            if (angle != Math.PI) {
+                this.scene.pushMatrix();
+                this.scene.rotate(angle, 0, 0, 1);
+                this.scene.translate(0, this.receptacleRadius, 0);
+                this.scene.rotate(this.petalsAngles[i], 1, 0, 0);
+                this.scene.translate(0, this.petalsRadius, 0);
+                this.petalAppearance.apply();
+                petal.display();
+                this.scene.popMatrix();
+            }
         }
 
+        this.scene.pushMatrix();
+        this.scene.rotate(Math.PI/2, 0, 1, 0);
+        this.receptacleAppearance.apply();
         this.receptacle.display();
+        this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.scene.translate(0, 0, this.receptacleRadius-0.5);
+        // MyStem is a complex object with many textures, so it will take care of applying them.
         this.stem.display();
         this.scene.popMatrix();
     }
