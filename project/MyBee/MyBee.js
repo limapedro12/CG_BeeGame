@@ -33,7 +33,7 @@ export class MyBee extends CGFobject {
 	updateBuffers() {}
 
     update(t) {
-        this.deltaPosZ = 2*Math.sin(t/200);
+        this.deltaPosZ = 0;//this.height*Math.sin(t/200);
     }
 
     display() {
@@ -41,13 +41,13 @@ export class MyBee extends CGFobject {
         this.beeAppearance.apply(); 
         
         this.scene.pushMatrix();
-        this.scene.translate(0, -this.height/2, -this.height);
-        this.scene.rotate(Math.PI/6, -1, 0, 0);
+        this.scene.translate(0, -this.height/3, -this.height/1.5);
+        this.scene.rotate(3*Math.PI/4, -1, 0, 0);
         this.abdomen.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0, 0, this.height/1.5);
+        this.scene.translate(0, 0, this.height/2);
         this.scene.rotate(Math.PI/3, 1, 0, 0);
         // this.scene.rotate(Math.PI/6, -1, 0, 0);
         this.head.display();

@@ -12,7 +12,7 @@ export class MyAbdomen extends CGFobject {
         this.scene = scene;
         this.height = height;
 
-        this.texture = new CGFtexture(this.scene, "images/bee.jpg");
+        this.texture = new CGFtexture(this.scene, "images/abdomen.jpg");
 		this.appearance = new CGFappearance(this.scene);
         this.appearance.setAmbient(1, 1, 1, 1.0);
         this.appearance.setDiffuse(1, 1, 1, 1.0);
@@ -31,7 +31,7 @@ export class MyAbdomen extends CGFobject {
         this.scene.pushMatrix();
         this.appearance.apply(); 
 
-        this.scene.scale(1, 1, 2);
+        this.scene.scale(1, 1.5, 1);
 
         this.sphere.display();
         this.scene.popMatrix();

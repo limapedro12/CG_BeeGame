@@ -149,7 +149,7 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     this.pushMatrix();
-    this.translate(0, -70 + this.bee.height/2, 0);
+    // this.translate(0, -70 + this.bee.height/2, 0);
     this.translate(0, this.bee.deltaPosZ, 0);
     this.bee.display();
     this.popMatrix();

@@ -12,13 +12,10 @@ export class MyTorax extends CGFobject {
         this.scene = scene;
         this.height = height;
 
-        this.texture = new CGFtexture(this.scene, "images/bee.jpg");
 		this.appearance = new CGFappearance(this.scene);
-        this.appearance.setAmbient(1, 1, 1, 1.0);
-        this.appearance.setDiffuse(1, 1, 1, 1.0);
+        this.appearance.setAmbient(241/255,194/255,50/255, 1.0);
+        this.appearance.setDiffuse(241/255,194/255,50/255, 1.0);
         this.appearance.setSpecular(0.2, 0.2, 0.2, 1.0);
-		this.appearance.setTexture(this.texture);
-		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.sphere = new MySphere(scene, 16, 8, height/2);
 
