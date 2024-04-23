@@ -2,6 +2,31 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyGarden } from "./MyGarden.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
+import { MyRock } from "./MyRock.js"
+import { MyRockSet } from "./MyRoockSet.js";
+
+/*
+.setUpdatePedtiod(50)
+MyScene.update(t) {
+  bee.update(t)
+}
+
+MyBee.update(t) {
+  dy = v dt;
+  ...
+  Ltime = t;
+}
+
+construtor() {
+  variaveiis
+  estadoInicial
+}
+
+display() {
+  translate(posI + Deltapos)
+}
+
+*/
 
 /**
  * MyScene
@@ -30,6 +55,9 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama.jpg"));
     this.garden = new MyGarden(this, 5, 5);
+
+    this.rockset = new MyRockSet(this, 140, 5)
+    
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -99,6 +127,12 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     this.panorama.display();
+
+    this.pushMatrix();
+    this.translate(0, -100, 0);
+    this.rockset.display();
+    this.popMatrix();
+
 
     this.pushMatrix();
     this.translate(40,-75+this.garden.maxHeight,0);
