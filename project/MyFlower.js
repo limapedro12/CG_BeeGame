@@ -52,11 +52,17 @@ export class MyFlower extends CGFobject {
 
         this.petalTexture = new CGFtexture(this.scene, "images/petal.jpg");
 		this.petalAppearance = new CGFappearance(this.scene);
+        this.petalAppearance.setAmbient(1, 1, 1, 1.0);
+        this.petalAppearance.setDiffuse(1, 1, 1, 1.0);
+        this.petalAppearance.setSpecular(0.2, 0.2, 0.2, 1.0);
 		this.petalAppearance.setTexture(this.petalTexture);
 		this.petalAppearance.setTextureWrap('REPEAT', 'REPEAT');
 		
 		this.receptacleTexture = new CGFtexture(this.scene, "images/receptacle.jpg");
 		this.receptacleAppearance = new CGFappearance(this.scene);
+        this.receptacleAppearance.setAmbient(1, 1, 1, 1.0);
+        this.receptacleAppearance.setDiffuse(1, 1, 1, 1.0);
+        this.receptacleAppearance.setSpecular(0.2, 0.2, 0.2, 1.0);
 		this.receptacleAppearance.setTexture(this.receptacleTexture);
 		this.receptacleAppearance.setTextureWrap('REPEAT', 'REPEAT');
 	}

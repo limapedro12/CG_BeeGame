@@ -42,6 +42,9 @@ export class MyScene extends CGFscene {
 
     this.texture = new CGFtexture(this, "images/terrain.jpg");
     this.appearance = new CGFappearance(this);
+    this.appearance.setAmbient(1, 1, 1, 1.0);
+    this.appearance.setDiffuse(1, 1, 1, 1.0);
+    this.appearance.setSpecular(0.2, 0.2, 0.2, 1.0);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
   }
@@ -56,7 +59,7 @@ export class MyScene extends CGFscene {
       1.0,
       0.1,
       1000,
-      vec3.fromValues(50, 10, 15),
+      vec3.fromValues(50, 0, 15),
       vec3.fromValues(0, 0, 0)
     );
   }
@@ -89,7 +92,7 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     this.appearance.apply();
-    this.translate(0,-100,0);
+    this.translate(0,-75,0);
     this.scale(400,400,400);
     this.rotate(-Math.PI/2.0,1,0,0);
     this.plane.display();
@@ -98,7 +101,7 @@ export class MyScene extends CGFscene {
     this.panorama.display();
 
     this.pushMatrix();
-    this.translate(50,-100+this.garden.maxHeight,0);
+    this.translate(40,-75+this.garden.maxHeight,0);
     this.garden.setLines(this.gardenLins);
     this.garden.setCols(this.gardenCols);
     this.garden.display();

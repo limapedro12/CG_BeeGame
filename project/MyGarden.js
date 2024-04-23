@@ -41,8 +41,8 @@ export class MyGarden extends CGFobject {
                 let leavesColor = null;
                 let flower = new MyFlower(scene, exteriorRadius, petalsNo, petalsColor, petalsAngleMin, petalsAngleMax, receptacleRadius, receptacleColor, stemRadius, stemSize, stemColor, leavesColor, i, j);
                 this.flowers.push(flower);
-                this.flowersXTrans.push(i*10 + (Math.random()*-5 + 5));
-                this.flowersZTrans.push(j*10 + (Math.random()*-5 + 5));
+                this.flowersXTrans.push(i*15 + (Math.random()*-5 + 5));
+                this.flowersZTrans.push(j*15 + (Math.random()*-5 + 5));
                 this.flowersRotate.push(Math.random()*Math.PI);
                 this.flowersHeight.push(flower.stem.height + receptacleRadius);
                 if (this.maxHeight < this.flowersHeight[i*cols + j]) {

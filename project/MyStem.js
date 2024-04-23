@@ -18,11 +18,17 @@ export class MyStem extends CGFobject {
 		
 		this.mainTexture = new CGFtexture(this.scene, "images/stem.jpg");
 		this.mainAppearance = new CGFappearance(this.scene);
+        this.mainAppearance.setAmbient(1, 1, 1, 1.0);
+        this.mainAppearance.setDiffuse(1, 1, 1, 1.0);
+        this.mainAppearance.setSpecular(0.2, 0.2, 0.2, 1.0);
 		this.mainAppearance.setTexture(this.mainTexture);
 		this.mainAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
         this.leafTexture = new CGFtexture(this.scene, "images/leaf.jpg");
 		this.leafAppearance = new CGFappearance(this.scene);
+        this.leafAppearance.setAmbient(1, 1, 1, 1.0);
+        this.leafAppearance.setDiffuse(1, 1, 1, 1.0);
+        this.leafAppearance.setSpecular(0.2, 0.2, 0.2, 1.0);
 		this.leafAppearance.setTexture(this.leafTexture);
 		this.leafAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
