@@ -56,7 +56,7 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama.jpg"));
     this.garden = new MyGarden(this, 5, 5);
 
-    this.rockset = new MyRockSet(this, 140, 5)
+    this.rockset = new MyRockSet(this, 55, 5)
     
 
     //Objects connected to MyInterface
@@ -129,7 +129,7 @@ export class MyScene extends CGFscene {
     this.panorama.display();
 
     this.pushMatrix();
-    this.translate(0, -100, 0);
+    this.translate(25, -75, -50);
     this.rockset.display();
     this.popMatrix();
 
