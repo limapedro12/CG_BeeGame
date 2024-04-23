@@ -5,6 +5,29 @@ import { MyPlane } from "./MyPlane.js";
 import { MyRock } from "./MyRock.js"
 import { MyRockSet } from "./MyRoockSet.js";
 
+/*
+.setUpdatePedtiod(50)
+MyScene.update(t) {
+  bee.update(t)
+}
+
+MyBee.update(t) {
+  dy = v dt;
+  ...
+  Ltime = t;
+}
+
+construtor() {
+  variaveiis
+  estadoInicial
+}
+
+display() {
+  translate(posI + Deltapos)
+}
+
+*/
+
 /**
  * MyScene
  * @constructor
@@ -46,7 +69,7 @@ export class MyScene extends CGFscene {
       null);
 
     this.rock = new MyRock(this, 5)
-    this.rockset = new MyRockSet(this, 55, 5)
+    this.rockset = new MyRockSet(this, 140, 5)
     
 
     //Objects connected to MyInterface
@@ -118,7 +141,7 @@ export class MyScene extends CGFscene {
     // this.flower.display();
 
     this.pushMatrix();
-    // this.translate(0, -100, 0);
+    this.translate(0, -100, 0);
     // this.rock.display();
     this.rockset.display()
     this.popMatrix();

@@ -96,6 +96,7 @@ export class MyRockSet extends CGFobject {
             let z_to_draw = y*this.radius*1.5 + z * (this.radius)*0.75
 
             this.scene.pushMatrix();
+            this.scene.translate(-this.numLevels*this.radius*0.5, 0, -this.numLevels*this.radius*0.5)
 
             this.scene.translate(x_to_draw, y_to_draw, z_to_draw);
             if(level > 1) {
