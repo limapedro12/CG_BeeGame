@@ -25,7 +25,8 @@ export class MyBee extends CGFobject {
 	updateBuffers() {}
 
     update(t) {
-        this.deltaPosZ = 0;//this.height*Math.sin(t/200);
+        this.deltaPosZ = this.height*Math.sin(t/200);
+        this.torax.update(t);
     }
 
     display() {

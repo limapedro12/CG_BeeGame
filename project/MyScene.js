@@ -68,6 +68,7 @@ export class MyScene extends CGFscene {
     // this.displayNormals = false;
     this.gardenLins = 5;
     this.gardenCols = 5;
+    this.enableAnimation = true;
 
     this.enableTextures(true);
 
@@ -101,7 +102,8 @@ export class MyScene extends CGFscene {
     this.setShininess(10.0);
   }
   update(t) {
-    this.bee.update(t);
+    if(this.enableAnimation)
+      this.bee.update(t);
   }
   display() {
     // ---- BEGIN Background, camera and axis setup
@@ -148,7 +150,7 @@ export class MyScene extends CGFscene {
 
     // The bee should be the last element to be drawn!
     this.pushMatrix();
-    this.translate(0, -70 + this.bee.height/2, 0);
+    // this.translate(0, -70 + this.bee.height/2, 0);
     this.translate(0, this.bee.deltaPosZ, 0);
     this.bee.display();
     this.popMatrix();

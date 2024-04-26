@@ -28,10 +28,16 @@ export class MyTorax extends CGFobject {
         this.leftWing = new MyWing(scene);
         this.rightWing = new MyWing(scene);
 
+        this.wingAngle = 0;
+
 		this.initBuffers();
 	}
 
 	updateBuffers() {}
+    
+    update(t) {
+        this.wingAngle = Math.PI/4*Math.sin(t/80);
+    }
 
     display() {
         this.scene.pushMatrix();
@@ -72,16 +78,26 @@ export class MyTorax extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0.8*this.height, this.height/3, 0);
+        this.scene.translate(Math.cos(Math.PI/6)*this.height - 0.1, this.height/3, 0);
         this.scene.rotate(Math.PI/2, 0, 0, 1);
         this.scene.rotate(Math.PI/2, 0, 1, 0);
+
+        this.scene.translate(0, 2, 0);
+        this.scene.rotate(this.wingAngle, 1, 0, 0);
+        this.scene.translate(0, -2, 0);
+
         this.leftWing.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-0.8*this.height, this.height/3, 0);
+        this.scene.translate(-Math.cos(Math.PI/6)*this.height + 0.1, this.height/3, 0);
         this.scene.rotate(Math.PI/2, 0, 0, 1);
         this.scene.rotate(Math.PI/2, 0, 1, 0);
+
+        this.scene.translate(0, -2, 0);
+        this.scene.rotate(-this.wingAngle, 1, 0, 0);
+        this.scene.translate(0, 2, 0);
+
         this.rightWing.display();
         this.scene.popMatrix();
     }
