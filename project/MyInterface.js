@@ -23,7 +23,8 @@ export class MyInterface extends CGFinterface {
 
 
         //Slider element in GUI
-        // this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
+        this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor');
+        this.gui.add(this.scene, 'scaleFactor', 0.5, 3).name('Scale Factor');
 
         // this.gui.add(this.scene, 'displayNormals').name("Display normals");
 
@@ -31,6 +32,26 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'gardenLins', [1, 2, 3, 4, 5]).name('Garden lines');
         this.gui.add(this.scene, 'gardenCols', [1, 2, 3, 4, 5]).name('Garden columns');
 
+        this.initKeys();
+
         return true;
+    }
+
+    initKeys() {
+        this.scene.gui = this;
+        this.processKeyboard = function () {};
+        this.activeKeys = {};
+    }
+
+    processKeyDown(event) {
+        this.activeKeys[event.code] = true;
+    };
+
+    processKeyUp(event) {
+        this.activeKeys[event.code] = false;
+    };
+
+    isKeyPressed(keyCode) {
+        return this.activeKeys[keyCode] || false;
     }
 }

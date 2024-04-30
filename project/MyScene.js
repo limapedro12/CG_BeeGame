@@ -60,12 +60,12 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama.jpg"));
     this.garden = new MyGarden(this, 5, 5);
     this.rockset = new MyRockSet(this, 55, 5);
-    this.bee = new MyBee(this, 4);
+    this.bee = new MyBee(this, 4, 0, 0, 0, 0, [0, 0]);
 
     //Objects connected to MyInterface
     this.displayAxis = false;
-    // this.scaleFactor = 1;
-    // this.displayNormals = false;
+    this.speedFactor = 1;
+    this.scaleFactor = 1;
     this.gardenLins = 5;
     this.gardenCols = 5;
     this.enableAnimation = true;
@@ -91,8 +91,8 @@ export class MyScene extends CGFscene {
       1.0,
       0.1,
       1000,
-      vec3.fromValues(50, 0, 15),
-      vec3.fromValues(0, 0, 0)
+      vec3.fromValues(-50, -45, 10),
+      vec3.fromValues(0, -55, 0)
     );
   }
   setDefaultAppearance() {
@@ -101,9 +101,43 @@ export class MyScene extends CGFscene {
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+  checkKeys() {
+    var text = "Keys pressed: ";
+    var keysPressed = false;
+
+    if (this.gui.isKeyPressed("KeyW")) {
+      text += " W ";
+      keysPressed = true;
+      this.bee.accelerate(this.speedFactor*0.1);
+    }
+
+    if (this.gui.isKeyPressed("KeyS")) {
+      text += " S ";
+      keysPressed = true;
+      this.bee.accelerate(this.speedFactor*(-0.1));
+    }
+
+    if (this.gui.isKeyPressed("KeyA")) {
+      text += " A ";
+      keysPressed = true;
+      this.bee.turn(this.speedFactor*0.1);
+    }
+
+    if (this.gui.isKeyPressed("KeyD")) {
+      text += " D ";
+      keysPressed = true;
+      this.bee.turn(this.speedFactor*(-0.1));
+    }
+
+    if (this.gui.isKeyPressed("KeyR")) {
+      text += " R ";
+      keysPressed = true;
+      this.bee.reset();
+    }
+  }
   update(t) {
-    if(this.enableAnimation)
-      this.bee.update(t);
+    this.checkKeys();
+    if (this.enableAnimation) this.bee.update(t);
   }
   display() {
     // ---- BEGIN Background, camera and axis setup
@@ -119,10 +153,10 @@ export class MyScene extends CGFscene {
     // Draw axis
     if (this.displayAxis) this.axis.display();
 
-    if (this.displayNormals)
-      this.panorama.enableNormalViz();
-    else
-      this.panorama.disableNormalViz();
+    // if (this.displayNormals)
+    //   this.panorama.enableNormalViz();
+    // else
+    //   this.panorama.disableNormalViz();
 
     // ---- BEGIN Primitive drawing section
 
@@ -150,8 +184,8 @@ export class MyScene extends CGFscene {
 
     // The bee should be the last element to be drawn!
     this.pushMatrix();
-    // this.translate(0, -70 + this.bee.height/2, 0);
-    this.translate(0, this.bee.deltaPosZ, 0);
+    this.translate(0, -50 + this.bee.height/2, 0);
+    this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
     this.bee.display();
     this.popMatrix();
 
