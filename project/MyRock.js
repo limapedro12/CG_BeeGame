@@ -1,4 +1,4 @@
-import { CGFobject, CGFappearance } from '../lib/CGF.js';
+import { CGFappearance, CGFobject, CGFtexture } from '../../../lib/CGF.js';
 /**
  * MyRock
  * @constructor
@@ -17,11 +17,13 @@ export class MyRock extends CGFobject {
 
         this.height_factor = Math.random() * 0.5 + 0.2;
 
-        this.material = new CGFappearance(this.scene);
-        this.material.setAmbient(0.2, 0.2, 0.2, 1.0);
-        this.material.setDiffuse(0.3, 0.3, 0.3, 1.0);
-        this.material.setSpecular(0.2, 0.2, 0.2, 1.0);
-        this.material.setShininess(10.0);
+        this.texture = new CGFtexture(this.scene, "images/rock.jpg");
+		this.material = new CGFappearance(this.scene);
+        this.material.setAmbient(1, 1, 1, 1.0);
+        this.material.setDiffuse(1, 1, 1, 1.0);
+        this.material.setSpecular(1, 1, 1, 1.0);
+		this.material.setTexture(this.texture);
+		this.material.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.initBuffers();
 	}
