@@ -4,7 +4,6 @@ import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MyRockSet } from "./MyRockSet.js";
 import { MyBee } from "./MyBee/MyBee.js";
-import { MyPolen } from "./MyPolen/MyPolen.js";
 
 /*
 .setUpdatePedtiod(50)
@@ -62,11 +61,6 @@ export class MyScene extends CGFscene {
     this.garden = new MyGarden(this, 5, 5);
     this.rockset = new MyRockSet(this, 55, 5);
     this.bee = new MyBee(this, 4);
-    this.polen_list_size = 1;
-    this.polen_list = [];
-    for (var i = 0; i < this.polen_list_size; i++) {
-      this.polen_list.push(new MyPolen(this, 10, 10, 1));
-    }
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -153,12 +147,6 @@ export class MyScene extends CGFscene {
     this.garden.setCols(this.gardenCols);
     this.garden.display();
     this.popMatrix();
-
-    for (var i = 0; i < this.polen_list.length; i++) {
-      this.pushMatrix();
-      this.polen_list[i].display();
-      this.popMatrix();
-    }
 
     // The bee should be the last element to be drawn!
     this.pushMatrix();
