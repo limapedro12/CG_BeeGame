@@ -184,7 +184,7 @@ export class MyScene extends CGFscene {
 
     // The bee should be the last element to be drawn!
     this.pushMatrix();
-    this.translate(0, -50 + this.bee.height/2, 0);
+    this.translate(0, -45 + this.bee.height/2, 0);
     this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
     this.bee.display();
     this.popMatrix();
