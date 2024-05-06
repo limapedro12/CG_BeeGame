@@ -137,4 +137,8 @@ export class MyRockSet extends CGFobject {
     angle_from_heights(height1, height2) {
         return ((height1 - height2)/this.radius) * Math.PI/4;
     }
+
+    get_height() {
+        return this.rocks[this.rocks.length-1].height();
+    }
 }

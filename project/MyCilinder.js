@@ -1,58 +1,102 @@
 import {CGFobject} from '../lib/CGF.js';
+
 /**
  * MyCilinder
  * @constructor
  * @param scene - Reference to MyScene object
  * @param slices 
  * @param stacks 
+ * @param radius
  */
 export class MyCilinder extends CGFobject {
-	constructor(scene, slices, stacks, radius) {
+	constructor(scene, slices, stacks, radius, inverted = false) {
 		super(scene);
 
 		this.slices = slices;
 		this.stacks = stacks;
 		this.radius = radius;
+		this.inverted = inverted;
 
 		this.initBuffers();
 	}
-	
-	get_vertices(slices, stacks){
-		let height = 1/stacks;
-		for(var k = 0; k < stacks; k++){
-			for(var i = 0; i <= slices; i++){
-				this.vertices.push(this.radius*Math.cos(i*2*Math.PI/slices), this.radius*Math.sin(i*2*Math.PI/slices), k*height);
-				this.vertices.push(this.radius*Math.cos(i*2*Math.PI/slices), this.radius*Math.sin(i*2*Math.PI/slices), (k+1)*height);
+
+	get_vertices() {
+        for (var z = 0; z <= this.stacks; z++) {
+            this.vertices.push(this.radius, 0, z / this.stacks);
+			if(this.inverted)
+				this.normals.push(-1, 0, 0);
+			else
+            	this.normals.push(1, 0, 0);
+        }
+
+        for (var i = 1; i <= this.slices; i++) {
+
+            let angle = 2*Math.PI * i / this.slices;
+            let x = this.radius * Math.cos(angle);
+            let y = this.radius * Math.sin(angle);
+
+            let size = Math.sqrt(x*x + y*y);
+            if (i != this.slices) {    
+                this.vertices.push(x, y, 0);
+				if(this.inverted)
+					this.normals.push(-x/size, -y/size, 0);
+				else
+                	this.normals.push(x/size, y/size, 0);
+            }
+
+            for (var j = 1; j <= this.stacks; j++) {
+                
+                if (i != this.slices) {
+
+                    let z = j / this.stacks;
+                    this.vertices.push(x, y, z);
+					if(this.inverted)
+						this.normals.push(-x / size, -y / size, 0);
+					else
+                    	this.normals.push(x / size, y / size, 0);
+                    
+                    let numVert = this.vertices.length / 3;
+                    let i1 = numVert - 2;
+                    let i2 = numVert - 1;
+                    let i3 = i2 - (this.stacks + 1);
+                    let i4 = i3 - 1;
+
+					if(this.inverted)
+						this.indices.push(i4, i2, i1, i4, i3, i2);
+					else
+                    	this.indices.push(i4, i1, i2, i4, i2, i3);
+
+                } else {
+
+                    let numVert = this.vertices.length / 3;
+                
+                    let i1 = j - 1;
+                    let i2 = j;
+                    let i3 = numVert - this.stacks - 1 + j;
+                    let i4 = i3 - 1;
+
+					if(this.inverted)
+						this.indices.push(i4, i2, i1, i4, i3, i2);
+					else
+                    	this.indices.push(i4, i1, i2, i4, i2, i3);
+                }
+            }
+			
+        }
+
+		for (var j = 0; j <= this.slices; j++) {
+			for (var i = 0; i <= this.stacks; i++) {
+				this.texCoords.push(j / this.slices, i / this.stacks);
 			}
 		}
+    }
 
-		for(var k = 0; k <= stacks; k++) {
-			for(var i = 0; i <= slices; i++) {
-				this.indices.push(i*2 + k*2*slices, i*2+2 + k*2*slices, i*2+3 + k*2*slices);
-				this.indices.push(i*2+3 + k*2*slices, i*2+1 + k*2*slices, i*2 + k*2*slices);
-			}
-		}
-
-		for(var k = 0; k < stacks; k++){
-			for(var i = 0; i <= slices; i++){
-				for(var j = 0; j < 2; j++)
-					this.normals.push(Math.cos(i*2*Math.PI/slices), Math.sin(i*2*Math.PI/slices), 0);
-			}
-		}
-
-		this.texCoords = [];
-		for (var i = 0; i <= stacks; i++) {
-			for (var j = 0; j <= slices; j++) {
-				this.texCoords.push(j / slices, i / stacks);
-			}
-		}
-	}
-
-	initBuffers() {
+    initBuffers() {
 		this.vertices = [];
 		this.indices = [];
 		this.normals = [];
-		this.get_vertices(this.slices, this.stacks);
+		this.texCoords = [];
+		this.get_vertices();
 
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles
@@ -63,4 +107,3 @@ export class MyCilinder extends CGFobject {
 
 	updateBuffers() {}
 }
-

@@ -4,6 +4,7 @@ import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MyRockSet } from "./MyRockSet.js";
 import { MyBee } from "./MyBee/MyBee.js";
+import { MyHive } from "./MyHive/MyHive.js";
 
 /*
 .setUpdatePedtiod(50)
@@ -59,8 +60,9 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this, 30);
     this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama.jpg"));
     this.garden = new MyGarden(this, 5, 5);
-    this.rockset = new MyRockSet(this, 55, 5);
+    this.rockset = new MyRockSet(this, 54, 5);
     this.bee = new MyBee(this, 1, 0, 0, 0, 0, [0, 0]);
+    this.hive = new MyHive(this);
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -190,5 +192,11 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     // ---- END Primitive drawing section
+
+    this.pushMatrix();
+    this.translate(28, this.rockset.get_height() - 50, -47);
+    this.rotate(Math.PI/2, 0, 1, 0);
+    this.hive.display()
+    this.popMatrix();
   }
 }
