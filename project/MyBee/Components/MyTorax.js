@@ -25,8 +25,8 @@ export class MyTorax extends CGFobject {
         this.leg3 = new MyAntennaLegs(scene, height/2);
         this.leg4 = new MyAntennaLegs(scene, height/2);
 
-        this.leftWing = new MyWing(scene);
-        this.rightWing = new MyWing(scene);
+        this.leftWing = new MyWing(scene, height);
+        this.rightWing = new MyWing(scene, height);
 
         this.wingAngle = 0;
 
@@ -82,10 +82,9 @@ export class MyTorax extends CGFobject {
         this.scene.rotate(Math.PI/2, 0, 0, 1);
         this.scene.rotate(Math.PI/2, 0, 1, 0);
 
-        this.scene.translate(0, 2, 0);
+        this.scene.translate(0, this.height/2, 0);
         this.scene.rotate(this.wingAngle, 1, 0, 0);
-        this.scene.translate(0, -2, 0);
-
+        this.scene.translate(0, -this.height/2, 0);
         this.leftWing.display();
         this.scene.popMatrix();
 
@@ -93,11 +92,9 @@ export class MyTorax extends CGFobject {
         this.scene.translate(-Math.cos(Math.PI/6)*this.height + 0.1, this.height/3, 0);
         this.scene.rotate(Math.PI/2, 0, 0, 1);
         this.scene.rotate(Math.PI/2, 0, 1, 0);
-
-        this.scene.translate(0, -2, 0);
+        this.scene.translate(0, -this.height/2, 0);
         this.scene.rotate(-this.wingAngle, 1, 0, 0);
-        this.scene.translate(0, 2, 0);
-
+        this.scene.translate(0, this.height/2, 0);
         this.rightWing.display();
         this.scene.popMatrix();
     }

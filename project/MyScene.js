@@ -60,7 +60,7 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama.jpg"));
     this.garden = new MyGarden(this, 5, 5);
     this.rockset = new MyRockSet(this, 55, 5);
-    this.bee = new MyBee(this, 4, 0, 0, 0, 0, [0, 0]);
+    this.bee = new MyBee(this, 1, 0, 0, 0, 0, [0, 0]);
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -184,7 +184,7 @@ export class MyScene extends CGFscene {
 
     // The bee should be the last element to be drawn!
     this.pushMatrix();
-    this.translate(0, -45 + this.bee.height/2, 0);
+    this.translate(0, -47 + this.bee.height/2, 0);
     this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
     this.bee.display();
     this.popMatrix();
