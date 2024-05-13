@@ -136,6 +136,33 @@ export class MyScene extends CGFscene {
       keysPressed = true;
       this.bee.reset();
     }
+
+    if (this.gui.isKeyPressed("KeyF")) {
+      text += " F ";
+      keysPressed = true;
+      for (var i = 0; i < this.garden.flowers.length; i++) {
+        let flower = this.garden.flowers[i];
+        let flowerX = 40 + this.garden.flowersXTrans[i];
+        let flowerZ = this.garden.flowersZTrans[i];
+        let flowerHeight = this.garden.flowersHeight[i];
+        if (Math.abs(this.bee.x - flowerX) <= 2 && Math.abs(this.bee.z - flowerZ) <= 2) {
+          this.bee.descend(flower, 2 + flowerHeight - 75 + 47 - this.bee.height/2);
+          break;
+        }
+      }
+    }
+
+    if (this.gui.isKeyPressed("KeyP")) {
+      text += " P ";
+      keysPressed = true;
+      this.bee.climb();
+    }
+
+    if (this.gui.isKeyPressed("KeyO")) {
+      text += " O ";
+      keysPressed = true;
+      this.bee.deliver();
+    }
   }
   update(t) {
     this.checkKeys();
@@ -184,19 +211,18 @@ export class MyScene extends CGFscene {
     this.garden.display();
     this.popMatrix();
 
-    // The bee should be the last element to be drawn!
     this.pushMatrix();
     this.translate(0, -47 + this.bee.height/2, 0);
     this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
     this.bee.display();
     this.popMatrix();
 
-    // ---- END Primitive drawing section
-
     this.pushMatrix();
     this.translate(28, this.rockset.get_height() - 50, -47);
     this.rotate(Math.PI/2, 0, 1, 0);
     this.hive.display()
     this.popMatrix();
+
+    // ---- END Primitive drawing section
   }
 }

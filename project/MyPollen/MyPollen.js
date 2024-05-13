@@ -1,17 +1,17 @@
 import { CGFappearance, CGFobject, CGFtexture } from '../../../lib/CGF.js';
-import { MyPolenPart } from './MyPolenPart.js';
+import { MyPollenPart } from './MyPollenPart.js';
 
 /**
- * MyPolen
+ * MyPollen
  * @constructor
  * @param size
  */
-export class MyPolen extends CGFobject {
+export class MyPollen extends CGFobject {
 	constructor(scene, height) {
 		super(scene);
 
-		this.bottomPart = new MyPolenPart(scene, 16, 8, height/2.5);
-        this.topPart = new MyPolenPart(scene, 16, 8, height/2.5);
+		this.bottomPart = new MyPollenPart(scene, 16, 8, height/2.5);
+        this.topPart = new MyPollenPart(scene, 16, 8, height/2.5);
 
 		this.initBuffers();
 	}
