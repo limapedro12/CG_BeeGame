@@ -5,6 +5,7 @@ import { MyPlane } from "./MyPlane.js";
 import { MyRockSet } from "./MyRockSet.js";
 import { MyBee } from "./MyBee/MyBee.js";
 import { MyHive } from "./MyHive/MyHive.js";
+import { MyPollen } from "./MyPollen/MyPollen.js";
 
 /*
 .setUpdatePedtiod(50)
@@ -104,42 +105,12 @@ export class MyScene extends CGFscene {
     this.setShininess(10.0);
   }
   checkKeys() {
-    var text = "Keys pressed: ";
-    var keysPressed = false;
-
-    if (this.gui.isKeyPressed("KeyW")) {
-      text += " W ";
-      keysPressed = true;
-      this.bee.accelerate(this.speedFactor*0.1);
-    }
-
-    if (this.gui.isKeyPressed("KeyS")) {
-      text += " S ";
-      keysPressed = true;
-      this.bee.accelerate(this.speedFactor*(-0.1));
-    }
-
-    if (this.gui.isKeyPressed("KeyA")) {
-      text += " A ";
-      keysPressed = true;
-      this.bee.turn(this.speedFactor*0.1);
-    }
-
-    if (this.gui.isKeyPressed("KeyD")) {
-      text += " D ";
-      keysPressed = true;
-      this.bee.turn(this.speedFactor*(-0.1));
-    }
-
-    if (this.gui.isKeyPressed("KeyR")) {
-      text += " R ";
-      keysPressed = true;
-      this.bee.reset();
-    }
-
-    if (this.gui.isKeyPressed("KeyF")) {
-      text += " F ";
-      keysPressed = true;
+    if (this.gui.isKeyPressed("KeyW")) this.bee.accelerate(this.speedFactor*0.1);
+    else if (this.gui.isKeyPressed("KeyS")) this.bee.accelerate(this.speedFactor*(-0.1));
+    else if (this.gui.isKeyPressed("KeyA")) this.bee.turn(this.speedFactor*0.1);
+    else if (this.gui.isKeyPressed("KeyD")) this.bee.turn(this.speedFactor*(-0.1));
+    else if (this.gui.isKeyPressed("KeyR")) this.bee.reset();
+    else if (this.gui.isKeyPressed("KeyF")) {
       for (var i = 0; i < this.garden.flowers.length; i++) {
         let flower = this.garden.flowers[i];
         let flowerX = 40 + this.garden.flowersXTrans[i];
@@ -151,18 +122,8 @@ export class MyScene extends CGFscene {
         }
       }
     }
-
-    if (this.gui.isKeyPressed("KeyP")) {
-      text += " P ";
-      keysPressed = true;
-      this.bee.climb();
-    }
-
-    if (this.gui.isKeyPressed("KeyO")) {
-      text += " O ";
-      keysPressed = true;
-      this.bee.deliver();
-    }
+    else if (this.gui.isKeyPressed("KeyP")) this.bee.climb();
+    else if (this.gui.isKeyPressed("KeyO")) this.bee.deliver(27.75,this.rockset.get_height()-58,-42.5,this.hive);
   }
   update(t) {
     this.checkKeys();

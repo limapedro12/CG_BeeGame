@@ -38,7 +38,12 @@ export class MyBee extends CGFobject {
 
         this.pollen = null;
         this.targetFlower = null;
+
+        this.targetHive = null;
+
+        this.targetX = null;
         this.targetY = null;
+        this.targetZ = null;
 	}
 
 	updateBuffers() {}
@@ -69,9 +74,14 @@ export class MyBee extends CGFobject {
             } else this.y += 0.3;
             console.log(this.y, ", ", this.targetY);
         } else if (this.state == 5) {
-            this.y = 0.5*this.height*Math.sin(t/200);
             this.torax.update(t);
+
+            let horizontalSpeedNorm = Math.sqrt(this.speed[0]**2 + this.speed[1]**2);
+            let speedNorm = 0.3;
+            let ySpeed = Math.sqrt(speedNorm**2 - horizontalSpeedNorm**2);
+
             this.x += this.speed[0];
+            this.y -= ySpeed + 0.5*this.height*Math.sin(t/200);
             this.z += this.speed[1];
         }
     }
@@ -111,8 +121,18 @@ export class MyBee extends CGFobject {
         this.state = 3;
     }
 
-    deliver() {
+    deliver(x, y, z, hive) {
         if (this.state != 4) return;
+
+        this.targetX = x;
+        this.targetY = y;
+        this.targetZ = z;
+
+        this.targetHive = hive;
+
+        this.speed = [(x - this.x)/100, (z - this.z)/100];
+
+        this.orientation = Math.atan2(this.speed[1], this.speed[0]);
 
         this.state = 5;
     }
