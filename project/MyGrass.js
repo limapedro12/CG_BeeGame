@@ -102,3 +102,26 @@ export class MyGrass extends CGFobject {
 	updateBuffers() {}
 }
 
+// transform_vertix(v, num_vertex) {
+//         // let midle_point = [old_vertices[0][0] + old_vertices[2][0], old_vertices[0][1] + old_vertices[2][1], old_vertices[0][2] + old_vertices[2][2]];
+//         // let line_vector = [midle_point[0] - old_vertices[0], midle_point[1] - old_vertices[1], midle_point[2] - v[2]];
+
+//         let signal = -1;
+//         if(num_vertex % 2 == 0) 
+//             signal = 1;
+
+//         let angle = this.angles[num_vertex];
+//         let dx = signal*(this.h/this.numTriangles);
+//         let dy = Math.sin(angle) * 2*this.h;
+//         let dz = Math.cos(angle) * 2*this.h;
+
+//         // if(line_vector[0] < line_vector[1] && line_vector[0] < line_vector[2]) {
+//         return [v[0]+dx, v[1]+dy, v[2]+dz];
+//         // } else if(line_vector[1] < line_vector[0] && line_vector[1] < line_vector[2]) {
+//         //     return [v[0]+dy, v[1]+dx, v[2]+dz];
+//         // } else {
+//         //     return [v[0]+dz, v[1]+dy, v[2]+dx];
+//         // }
+//     }
+
+
