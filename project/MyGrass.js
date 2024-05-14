@@ -9,16 +9,16 @@ export class MyGrass extends CGFobject {
 	constructor(scene) {
 		super(scene);
 
-		this.h = 1;
-        this.numTriangles = 10;
+		this.h = 2;
+        this.numTriangles = 5;
 
         // this.angles = [Math.PI/4, Math.PI/4, Math.PI/4, Math.PI/4, Math.PI/4, Math.PI/4, Math.PI/4, Math.PI/4, Math.PI/4];
         // this.angles = [Math.PI, Math.PI, Math.PI, Math.PI, Math.PI, Math.PI, Math.PI, Math.PI, Math.PI];
         // this.angles = [Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2];
 
         this.angles = [];
-        for(var i = 0; i < this.numTriangles; i++) {
-            this.angles.push(Math.random() * Math.PI/6 + Math.PI/2 - Math.PI/12);
+        for(var i = 1; i < this.numTriangles+1; i++) {
+            this.angles.push(Math.random() * Math.PI/(4*i) + Math.PI/2 - Math.PI/(8*i));
         }
 
 		this.initBuffers();
@@ -42,10 +42,15 @@ export class MyGrass extends CGFobject {
 	}
 
     transform_vertix(v, num_vertex) {
+        let signal = -1;
+        if(num_vertex % 2 == 0) 
+            signal = 1;
+
         let angle = this.angles[num_vertex];
-        let dy = Math.sin(angle) * 2*this.h;
-        let dz = Math.cos(angle) * 2*this.h;
-        return [v[0], v[1] + dy, v[2]+dz];
+        let dx = signal*(this.h/this.numTriangles);
+        let dy = Math.sin(angle) * 2*this.h + dx;
+        let dz = Math.cos(angle) * 2*this.h + dx;
+        return [v[0]+dx, v[1] + dy, v[2]+dz];
     }
 
     add_triangle(v1, v2, v3, num_vertex) {
