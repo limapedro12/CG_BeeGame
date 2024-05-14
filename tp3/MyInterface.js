@@ -18,7 +18,6 @@ export class MyInterface extends CGFinterface {
         this.gui = new dat.GUI();
 
         this.gui.add(this.scene, 'displayAxis').name("Display axis");
-        this.gui.add(this.scene, 'displayNormals').name("Display normals");
 
         // example of a dropdown that has numeric ID's associated, 
         // and an event handler to be called when the selection changes
