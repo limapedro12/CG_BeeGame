@@ -82,6 +82,8 @@ export class MyScene extends CGFscene {
     this.appearance.setSpecular(0.2, 0.2, 0.2, 1.0);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.grassShader = new CGFshader(this.gl, "shaders/grass.vert", "shaders/grass.frag");
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -141,6 +143,9 @@ export class MyScene extends CGFscene {
   update(t) {
     this.checkKeys();
     if (this.enableAnimation) this.bee.update(t);
+    this.grassFloor.update(t);
+
+    this.grassShader.setUniformsValues({ timeFactor: t / 100 % 100 });
   }
   display() {
     // ---- BEGIN Background, camera and axis setup
@@ -184,6 +189,13 @@ export class MyScene extends CGFscene {
     this.garden.setCols(this.gardenCols);
     this.garden.display();
     this.popMatrix();
+
+    this.setActiveShader(this.grassShader);
+    this.pushMatrix();
+    this.translate(0, -75, 0);
+    this.grassFloor.display();
+    this.popMatrix();
+    this.setActiveShader(this.defaultShader);
 
     // The bee should be the last element to be drawn!
     this.pushMatrix();
