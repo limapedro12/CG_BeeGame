@@ -22,8 +22,6 @@ export class MyGrassFloor extends CGFobject {
             }
             this.grassList.push(grassListTemp)
         }
-
-        
 	}
 
 	updateBuffers() {}
