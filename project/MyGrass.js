@@ -10,16 +10,16 @@ export class MyGrass extends CGFobject {
 		super(scene);
 
 		this.h = 2;
-        this.numTriangles = 5;
+        this.numTriangles = 10;
 
         // this.angles = [Math.PI/4, Math.PI/4, Math.PI/4, Math.PI/4, Math.PI/4, Math.PI/4, Math.PI/4, Math.PI/4, Math.PI/4];
         // this.angles = [Math.PI, Math.PI, Math.PI, Math.PI, Math.PI, Math.PI, Math.PI, Math.PI, Math.PI];
-        // this.angles = [Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2];
+        this.angles = [Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2, Math.PI/2];
 
-        this.angles = [];
-        for(var i = 1; i < this.numTriangles+1; i++) {
-            this.angles.push(Math.random() * Math.PI/(4*i) + Math.PI/2 - Math.PI/(8*i));
-        }
+        // this.angles = [];
+        // for(var i = 1; i < this.numTriangles+1; i++) {
+        //     this.angles.push(Math.random() * Math.PI/(4*i) + Math.PI/2 - Math.PI/(8*i));
+        // }
 
 		this.initBuffers();
 	}
@@ -81,8 +81,6 @@ export class MyGrass extends CGFobject {
 
         this.indices.push(this.vertices.length/3 - 3, this.vertices.length/3 - 2, this.vertices.length/3 - 1);
         this.indices.push(this.vertices.length/3 - 4, this.vertices.length/3 - 5, this.vertices.length/3 - 6);
-
-        console.log("Added triangle");
     }
 
 	initBuffers() {
