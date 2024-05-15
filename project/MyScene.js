@@ -5,30 +5,6 @@ import { MyPlane } from "./MyPlane.js";
 import { MyRockSet } from "./MyRockSet.js";
 import { MyBee } from "./MyBee/MyBee.js";
 import { MyHive } from "./MyHive/MyHive.js";
-import { MyPollen } from "./MyPollen/MyPollen.js";
-
-/*
-.setUpdatePedtiod(50)
-MyScene.update(t) {
-  bee.update(t)
-}
-
-MyBee.update(t) {
-  dy = v dt;
-  ...
-  Ltime = t;
-}
-
-construtor() {
-  variaveiis
-  estadoInicial
-}
-
-display() {
-  translate(posI + Deltapos)
-}
-
-*/
 
 /**
  * MyScene
@@ -123,7 +99,7 @@ export class MyScene extends CGFscene {
       }
     }
     else if (this.gui.isKeyPressed("KeyP")) this.bee.climb();
-    else if (this.gui.isKeyPressed("KeyO")) this.bee.deliver(27.75,this.rockset.get_height()-58,-42.5,this.hive);
+    else if (this.gui.isKeyPressed("KeyO")) this.bee.deliver(27.75,-42.5,this.hive);
   }
   update(t) {
     this.checkKeys();
@@ -174,12 +150,12 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     this.translate(0, -47 + this.bee.height/2, 0);
-    this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+    this.bee.scaleFactor = this.scaleFactor;
     this.bee.display();
     this.popMatrix();
 
     this.pushMatrix();
-    this.translate(28, this.rockset.get_height() - 50, -47);
+    this.translate(28, this.rockset.get_height() - 45, -47);
     this.rotate(Math.PI/2, 0, 1, 0);
     this.hive.display()
     this.popMatrix();

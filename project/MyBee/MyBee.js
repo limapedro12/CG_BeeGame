@@ -14,6 +14,8 @@ export class MyBee extends CGFobject {
         this.scene = scene;
         this.height = height;
 
+        this.scaleFactor = 1;
+
         this.head = new MyHead(scene, height);
 		this.torax = new MyTorax(scene, height);
         this.abdomen = new MyAbdomen(scene, height);
@@ -63,26 +65,30 @@ export class MyBee extends CGFobject {
                 }
                 this.state = 2;
             } else this.y -= 0.3;
-            console.log(this.y, ", ", this.targetY);
         } else if (this.state == 2) {
-            // nothing
+            // nothing to do
         } else if (this.state == 3) {
             this.torax.update(t);
             if (this.y >= this.targetY) {
                 if (this.pollen == null) this.state = 0;
                 else this.state = 4;
             } else this.y += 0.3;
-            console.log(this.y, ", ", this.targetY);
         } else if (this.state == 5) {
             this.torax.update(t);
+            this.y += 0.5*this.height*Math.sin(t/200);
 
-            let horizontalSpeedNorm = Math.sqrt(this.speed[0]**2 + this.speed[1]**2);
-            let speedNorm = 0.3;
-            let ySpeed = Math.sqrt(speedNorm**2 - horizontalSpeedNorm**2);
+            if (Math.abs(this.x - this.targetX) <= 0.1 && Math.abs(this.z - this.targetZ) <= 0.1) {
+                this.x += this.speed[0];
+                this.z += this.speed[1];
+            } else {
+                this.targetHive.addPollen(this.pollen);
+                this.pollen = null;
 
-            this.x += this.speed[0];
-            this.y -= ySpeed + 0.5*this.height*Math.sin(t/200);
-            this.z += this.speed[1];
+                this.speed = [0, 0];
+                this.turn(Math.PI);
+
+                this.state = 0;
+            }
         }
     }
 
@@ -108,9 +114,9 @@ export class MyBee extends CGFobject {
 
         this.targetFlower = flower;
         this.targetY = height;
-        this.state = 1;
+        this.verticalSpeed = -0.3;
 
-        console.log(this.targetY);
+        this.state = 1;
     }
 
     climb() {
@@ -118,14 +124,15 @@ export class MyBee extends CGFobject {
 
         this.targetFlower = null;
         this.targetY = 0;
+        this.verticalSpeed = 0.3;
+
         this.state = 3;
     }
 
-    deliver(x, y, z, hive) {
+    deliver(x, z, hive) {
         if (this.state != 4) return;
 
         this.targetX = x;
-        this.targetY = y;
         this.targetZ = z;
 
         this.targetHive = hive;
@@ -149,6 +156,7 @@ export class MyBee extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.orientation, 0, 1, 0);
+        this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
         
         this.scene.pushMatrix();
         this.scene.translate(0, -this.height/3, -this.height/1.5);
@@ -165,7 +173,7 @@ export class MyBee extends CGFobject {
         if (this.pollen != null) {
             this.scene.pushMatrix();
             this.scene.translate(0, -0.5 - this.height/2, 0);
-            // this.scene.rotate(-Math.PI/3, 1, 0, 0);
+            this.scene.scale(1/this.scaleFactor, 1/this.scaleFactor, 1/this.scaleFactor);
             this.pollen.display();
             this.scene.popMatrix();
         }
