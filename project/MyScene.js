@@ -5,7 +5,7 @@ import { MyPlane } from "./MyPlane.js";
 import { MyRockSet } from "./MyRockSet.js";
 import { MyBee } from "./MyBee/MyBee.js";
 import { MyHive } from "./MyHive/MyHive.js";
-import { MyGrass } from "./MyGrass.js";
+import { MyGrassFloor } from "./MyGrassFloor.js";
 
 /*
 .setUpdatePedtiod(50)
@@ -64,7 +64,7 @@ export class MyScene extends CGFscene {
     this.rockset = new MyRockSet(this, 54, 5);
     this.bee = new MyBee(this, 1, 0, 0, 0, 0, [0, 0]);
     this.hive = new MyHive(this);
-    this.grass = new MyGrass(this);
+    this.grassFloor = new MyGrassFloor(this, 20, 20);
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -145,8 +145,6 @@ export class MyScene extends CGFscene {
     if (this.enableAnimation) this.bee.update(t);
   }
   display() {
-    this.grass.enableNormalViz();
-
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -190,8 +188,8 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     this.pushMatrix();
-    this.translate(0, -40, 0);
-    this.grass.display();
+    this.translate(0, -75, 0);
+    this.grassFloor.display();
     this.popMatrix();
 
     // The bee should be the last element to be drawn!
