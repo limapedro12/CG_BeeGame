@@ -13,7 +13,7 @@ uniform float randomFactor;
 varying vec2 vTextureCoord;
 
 void main() {
-	vec3 offset=vec3(0.0,0.0, aVertexPosition[1] * aVertexPosition[1] * 0.1 * (randomFactor*2.0 + sin(timeFactor*0.1)*0.5));
+	vec3 offset=vec3(0.0,0.0, aVertexPosition[1] * aVertexPosition[1] * 0.1 * (randomFactor*0.2 + sin(timeFactor*0.1)*0.3));
 
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + offset, 1.0);
 }

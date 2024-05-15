@@ -5,6 +5,7 @@ import { MyPlane } from "./MyPlane.js";
 import { MyRockSet } from "./MyRockSet.js";
 import { MyBee } from "./MyBee/MyBee.js";
 import { MyHive } from "./MyHive/MyHive.js";
+import { MyGrassFloor } from "./MyGrassFloor.js";
 
 /*
 .setUpdatePedtiod(50)
@@ -63,6 +64,7 @@ export class MyScene extends CGFscene {
     this.rockset = new MyRockSet(this, 54, 5);
     this.bee = new MyBee(this, 1, 0, 0, 0, 0, [0, 0]);
     this.hive = new MyHive(this);
+    this.grassFloor = new MyGrassFloor(this, 50, 50);
 
     //Objects connected to MyInterface
     this.displayAxis = false;

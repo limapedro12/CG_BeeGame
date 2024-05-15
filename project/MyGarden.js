@@ -1,6 +1,5 @@
 import {CGFappearance, CGFobject} from '../lib/CGF.js';
 import { MyFlower } from './MyFlower.js';
-import { MyGrassFloor } from './MyGrassFloor.js';
 /**
  * MyGarden
  * @constructor
@@ -51,7 +50,6 @@ export class MyGarden extends CGFobject {
                 }
             }
         }
-        this.grassFloor = new MyGrassFloor(scene, 20, 20);
 	}
 
     updateFlowersPosition() {
@@ -102,9 +100,5 @@ export class MyGarden extends CGFobject {
                 this.scene.popMatrix();
             }
         }
-        this.scene.pushMatrix();
-        this.scene.translate(0, -this.maxHeight, 0);
-        this.grassFloor.display();
-        this.scene.popMatrix();
     }
 }
