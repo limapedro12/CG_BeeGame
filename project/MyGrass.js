@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import {CGFobject, CGFappearance, CGFtexture} from '../lib/CGF.js';
 
 /**
  * MyGrass
@@ -20,6 +20,14 @@ export class MyGrass extends CGFobject {
         // for(var i = 1; i < this.numTriangles+1; i++) {
         //     this.angles.push(Math.random() * Math.PI/(4*i) + Math.PI/2 - Math.PI/(8*i));
         // }
+
+        this.texture = new CGFtexture(this.scene, "images/leaf.jpg");
+		this.appearance = new CGFappearance(this.scene);
+        this.appearance.setAmbient(1, 1, 1, 1.0);
+        this.appearance.setDiffuse(1, 1, 1, 1.0);
+        this.appearance.setSpecular(0.2, 0.2, 0.2, 1.0);
+		this.appearance.setTexture(this.texture);
+		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.initBuffers();
 	}
@@ -81,6 +89,10 @@ export class MyGrass extends CGFobject {
 
         this.indices.push(this.vertices.length/3 - 3, this.vertices.length/3 - 2, this.vertices.length/3 - 1);
         this.indices.push(this.vertices.length/3 - 4, this.vertices.length/3 - 5, this.vertices.length/3 - 6);
+
+        this.texCoords.push(0, 0);
+        this.texCoords.push(1, 0);
+        this.texCoords.push(0, 1);
     }
 
 	initBuffers() {
@@ -98,6 +110,11 @@ export class MyGrass extends CGFobject {
 	}
 
 	updateBuffers() {}
+
+    display() {
+        // this.appearance.apply();
+        super.display();
+    }
 }
 
 // transform_vertix(v, num_vertex) {
