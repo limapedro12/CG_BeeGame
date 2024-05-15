@@ -1,14 +1,14 @@
 import { CGFappearance, CGFobject, CGFtexture } from '../../../lib/CGF.js';
 
 /**
- * MyPolen
+ * MyPollen
  * @constructor
  * @param scene - Reference to MyScene object
  * @param slices 
  * @param stacks 
  * @param radius
  */
-export class MyPolenPart extends CGFobject {
+export class MyPollenPart extends CGFobject {
 	constructor(scene, slices, stacks, radius) {
 		super(scene);
 
@@ -16,7 +16,7 @@ export class MyPolenPart extends CGFobject {
 		this.stacks = stacks;
         this.radius = radius;
 
-        this.texture = new CGFtexture(this.scene, "images/polen.jpg");
+        this.texture = new CGFtexture(this.scene, "images/pollen.jpg");
 		this.appearance = new CGFappearance(this.scene);
         this.appearance.setAmbient(1, 1, 1, 1.0);
         this.appearance.setDiffuse(1, 1, 1, 1.0);
