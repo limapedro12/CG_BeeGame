@@ -51,8 +51,6 @@ export class MyBee extends CGFobject {
 	updateBuffers() {}
 
     update(t) {
-        // console.log(this.x);
-        // console.log(this.z);
         if (this.state == 0 || this.state == 4) {
             this.y = 0.5*this.height*Math.sin(t/200);
             this.torax.update(t);
