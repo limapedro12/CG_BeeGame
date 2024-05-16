@@ -1,5 +1,5 @@
-import {CGFappearance, CGFobject} from '../lib/CGF.js';
-import { MyFlower } from './MyFlower.js';
+import {CGFappearance, CGFobject} from '../../lib/CGF.js';
+import { MyFlower } from './Components/MyFlower.js';
 /**
  * MyGarden
  * @constructor

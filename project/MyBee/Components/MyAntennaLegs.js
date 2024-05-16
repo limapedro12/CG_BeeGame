@@ -1,5 +1,5 @@
 import { CGFappearance, CGFobject, CGFtexture } from '../../../lib/CGF.js';
-import { MySphere } from '../../MySphere.js';
+import { MySphere } from '../../Geometric/MySphere.js';
 
 /**
  * MyAntennaLegs

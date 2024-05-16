@@ -1,6 +1,6 @@
 import {CGFobject, CGFtexture, CGFappearance} from '../../../lib/CGF.js';
-import { MyCilinder } from '../../MyCilinder.js';
-import { MyCircle } from '../../MyCircle.js';
+import { MyCilinder } from '../../Geometric/MyCilinder.js';
+import { MyCircle } from '../../Geometric/MyCircle.js';
 /**
  * MyWing
  * @constructor

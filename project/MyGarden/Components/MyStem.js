@@ -1,5 +1,5 @@
-import {CGFobject, CGFtexture, CGFappearance} from '../lib/CGF.js';
-import { MyCilinder } from './MyCilinder.js';
+import {CGFobject, CGFtexture, CGFappearance} from '../../../lib/CGF.js';
+import { MyCilinder } from '../../Geometric/MyCilinder.js';
 import { MyLeaf } from './MyLeaf.js';
 /**
  * MyStem

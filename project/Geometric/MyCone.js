@@ -1,22 +1,25 @@
-import {CGFobject} from '../lib/CGF.js';
+import {CGFobject} from '../../lib/CGF.js';
 /**
- * MyCircle
+ * MyCone
  * @constructor
  * @param scene - Reference to MyScene object
  * @param slices
+ * @param radius
+ * @param height
  */
-export class MyCircle extends CGFobject {
-	constructor(scene, slices, radius) {
+export class MyCone extends CGFobject {
+	constructor(scene, slices, radius, height) {
 		super(scene);
 
 		this.slices = slices;
 		this.radius = radius;
+		this.height = height;
 
 		this.initBuffers();
 	}
 	
 	get_vertices(slices){
-        this.vertices.push(0, 0, 0);
+        this.vertices.push(0, 0, this.height);
         this.vertices.push(0, 0, 0);
 
         for(var i = 0; i <= slices; i++) {
@@ -33,19 +36,12 @@ export class MyCircle extends CGFobject {
             this.normals.push(0, 1, 0);
             this.normals.push(0, -1, 0);
         }
-
-		this.texCoords.push(0.5, 0.5);
-		for(var i = 0; i <= slices; i++) {
-            this.texCoords.push(0.5*Math.cos(i*2*Math.PI/slices) + 0.5, 0.5*Math.sin(i*2*Math.PI/slices) + 0.5, 0);
-            this.texCoords.push(0.5*Math.cos(i*2*Math.PI/slices)+ 0.5, 0.5*Math.sin(i*2*Math.PI/slices) + 0.5, 0);
-        }
 	}
 
 	initBuffers() {
 		this.vertices = [];
 		this.indices = [];
 		this.normals = [];
-		this.texCoords = [];
 		this.get_vertices(this.slices);
 
 		//The defined indices (and corresponding vertices)

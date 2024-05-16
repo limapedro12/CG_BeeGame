@@ -1,5 +1,5 @@
 import {CGFappearance, CGFobject, CGFtexture, CGFshader} from '../lib/CGF.js';
-import { MySphere } from './MySphere.js';
+import { MySphere } from './Geometric/MySphere.js';
 /**
  * MyPanorama
  * @constructor

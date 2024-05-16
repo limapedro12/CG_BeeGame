@@ -1,13 +1,13 @@
-import {CGFobject} from '../lib/CGF.js';
+import {CGFobject} from '../../../lib/CGF.js';
 /**
- * MySphere
+ * MyReceptacle
  * @constructor
  * @param scene - Reference to MyScene object
  * @param slices 
  * @param stacks 
  * @param radius
  */
-export class MySphere extends CGFobject {
+export class MyReceptacle extends CGFobject {
 	constructor(scene, slices, stacks, radius, inverted = false) {
 		super(scene);
 
@@ -37,7 +37,7 @@ export class MySphere extends CGFobject {
                 
                 if (this.inverted) this.normals.push(-x/normal_len, -y/normal_len, -z/normal_len);
                 else this.normals.push(x/normal_len, y/normal_len, z/normal_len);
-
+                
                 this.texCoords.push(-slice / this.slices, -stack / this.stacks);
             }
         }

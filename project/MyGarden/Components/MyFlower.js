@@ -1,8 +1,8 @@
-import {CGFappearance, CGFobject, CGFtexture} from '../lib/CGF.js';
+import {CGFappearance, CGFobject, CGFtexture} from '../../../lib/CGF.js';
 import { MyPetal } from './MyPetal.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyStem } from './MyStem.js';
-import { MyPollen } from "./MyPollen/MyPollen.js";
+import { MyPollen } from "../../MyPollen/MyPollen.js";
 
 /**
  * MyFlower

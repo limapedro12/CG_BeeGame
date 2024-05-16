@@ -1,6 +1,6 @@
 import { CGFappearance, CGFobject, CGFtexture } from '../../../lib/CGF.js';
-import { MySphere } from '../../MySphere.js';
-import { MyCone } from '../../MyCone.js';
+import { MySphere } from '../../Geometric/MySphere.js';
+import { MyCone } from '../../Geometric/MyCone.js';
 
 /**
  * MyAbdomen

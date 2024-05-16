@@ -1,5 +1,5 @@
-import {CGFobject, CGFtexture, CGFappearance} from '../lib/CGF.js';
-import { MyTriangle } from './MyTriangle.js';
+import {CGFobject, CGFtexture, CGFappearance} from '../../../lib/CGF.js';
+import { MyTriangle } from '../../Geometric/MyTriangle.js';
 /**
  * MyPetal
  * @constructor
