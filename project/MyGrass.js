@@ -37,7 +37,7 @@ export class MyGrass extends CGFobject {
         if(num_vertex % 2 == 0) 
             signal = 1;
         let dx = signal*(this.h/this.numTriangles);
-        let dy = this.h/this.numTriangles;
+        let dy = 2*this.h;
         return [v[0]+dx, v[1] + dy, v[2]];
     }
 
