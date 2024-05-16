@@ -15,6 +15,8 @@ varying vec2 vTextureCoord;
 uniform sampler2D uSampler;
 
 void main() {
+	vTextureCoord = aTextureCoord;
+	
 	vec3 offset=vec3(0.0,0.0, aVertexPosition[1] * aVertexPosition[1] * 0.1 * (randomFactor*0.1 + sin(timeFactor*0.1)*0.1));
 
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + offset, 1.0);

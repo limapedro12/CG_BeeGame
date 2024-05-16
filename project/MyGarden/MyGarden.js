@@ -109,12 +109,9 @@ export class MyGarden extends CGFobject {
             }
         }
         
-        this.scene.setActiveShader(this.scene.grassShader);
-        this.grassFloor.grassList[0][0].texture.bind();
         this.scene.pushMatrix();
         this.scene.translate(0, -this.maxHeight, 0);
         this.grassFloor.display();
         this.scene.popMatrix();
-        this.scene.setActiveShader(this.scene.defaultShader);
     }
 }

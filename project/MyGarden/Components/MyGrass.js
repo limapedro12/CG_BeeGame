@@ -41,29 +41,38 @@ export class MyGrass extends CGFobject {
         return [v[0]+dx, v[1] + dy, v[2]];
     }
 
-    add_triangle(v1, v2, v3) {
-        this.vertices.push(v1[0], v1[1], v1[2]);
-        this.vertices.push(v2[0], v2[1], v2[2]);
-        this.vertices.push(v3[0], v3[1], v3[2]);
+    add_triangle(v1, v2, v3, numVertex) {
+        // let signal = -1;
+        // if(num_vertex % 2 == 0) 
+        let signal = 1;
+        let textCoordX = signal*(1/this.numTriangles);
 
         this.vertices.push(v1[0], v1[1], v1[2]);
         this.vertices.push(v2[0], v2[1], v2[2]);
         this.vertices.push(v3[0], v3[1], v3[2]);
 
-        this.normals.push(0, 1, 1);
-        this.normals.push(0, 1, 1);
-        this.normals.push(0, 1, 1);
+        this.vertices.push(v1[0], v1[1], v1[2]);
+        this.vertices.push(v2[0], v2[1], v2[2]);
+        this.vertices.push(v3[0], v3[1], v3[2]);
 
-        this.normals.push(0, -1, -1);
-        this.normals.push(0, -1, -1);
-        this.normals.push(0, -1, -1);
+        this.texCoords.push(1 - textCoordX, numVertex/this.numTriangles);
+        this.texCoords.push(textCoordX, (numVertex+1)/this.numTriangles);
+        this.texCoords.push(1 -textCoordX, (numVertex+2)/this.numTriangles);
+        
+        this.texCoords.push(textCoordX, numVertex/this.numTriangles);
+        this.texCoords.push(1 - textCoordX, (numVertex+1)/this.numTriangles);
+        this.texCoords.push(textCoordX, (numVertex+2)/this.numTriangles);
+
+        this.normals.push(0, 0, 1);
+        this.normals.push(0, 0, 1);
+        this.normals.push(0, 0, 1);
+
+        this.normals.push(0, 0, -1);
+        this.normals.push(0, 0, -1);
+        this.normals.push(0, 0, -1);
 
         this.indices.push(this.vertices.length/3 - 3, this.vertices.length/3 - 2, this.vertices.length/3 - 1);
         this.indices.push(this.vertices.length/3 - 4, this.vertices.length/3 - 5, this.vertices.length/3 - 6);
-
-        this.texCoords.push(0, 0);
-        this.texCoords.push(1, 0);
-        this.texCoords.push(0, 1);
     }
 
 	initBuffers() {
@@ -81,7 +90,6 @@ export class MyGrass extends CGFobject {
 	updateBuffers() {}
 
     display() {
-        // this.appearance.apply();
         super.display();
     }
 }

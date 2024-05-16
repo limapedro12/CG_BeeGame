@@ -1,4 +1,4 @@
-import {CGFappearance, CGFobject} from '../../../lib/CGF.js';
+import {CGFappearance, CGFobject, CGFshader, CGFtexture} from '../../../lib/CGF.js';
 import { MyGrass } from './MyGrass.js';
 /**
  * MyGrassFloor
@@ -28,7 +28,11 @@ export class MyGrassFloor extends CGFobject {
             this.grassList.push(grassListTemp)
             this.randomFactorList.push(randomFactorListTemp)
         }
-        
+
+        this.grassShader = new CGFshader(this.scene.gl, "shaders/grass.vert", "shaders/grass.frag");
+        this.grassShader.setUniformsValues({ uSampler: 0 });
+
+        this.texture = new CGFtexture(this.scene, "images/grass.jpg");
 	}
 
     update(t) {
@@ -39,15 +43,18 @@ export class MyGrassFloor extends CGFobject {
                     this.randomFactorList[i][j] = Math.random()-0.5;
             }
         }
-    
+
+        this.grassShader.setUniformsValues({ timeFactor: t / 100 % 100 });
     }
 
 	updateBuffers() {}
 
     display() {
+        this.scene.setActiveShader(this.grassShader);
+        this.texture.bind(0);
         for(var i = 0; i < this.grassList.length; i++) {
             for(var j = 0; j < this.grassList[i].length; j++) {
-                this.scene.grassShader.setUniformsValues({ randomFactor: this.randomFactorList[i][j] });
+                this.grassShader.setUniformsValues({ randomFactor: this.randomFactorList[i][j] });
 
                 this.scene.pushMatrix();
                 this.scene.translate(i*this.rowSpace, 0, j*this.colSpace);
@@ -56,5 +63,6 @@ export class MyGrassFloor extends CGFobject {
                 this.scene.popMatrix();
             }
         }
+        this.scene.setActiveShader(this.scene.defaultShader);
     }
 }
