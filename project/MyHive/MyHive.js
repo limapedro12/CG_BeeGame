@@ -1,6 +1,7 @@
 import { CGFappearance, CGFobject, CGFtexture } from '../../../lib/CGF.js';
 import { MyCilinder } from '../MyCilinder.js';
 import { MyCircle } from '../MyCircle.js';
+import { MyCover } from './MyCover.js';
 
 /**
  * MyHive
@@ -40,6 +41,8 @@ export class MyHive extends CGFobject {
 
         this.logInside = new MyCilinder(scene, 16, 8, 1, true);
 
+        this.cover = new MyCover(scene);
+
 		this.initBuffers();
 	}
 
@@ -62,6 +65,12 @@ export class MyHive extends CGFobject {
 
         this.outsideAppearance.apply();
         this.logOutside.display();
+
+            this.scene.pushMatrix();
+            this.scene.translate(0, 0, -this.cover.height);
+            this.cover.display();
+            this.scene.popMatrix();
+
         this.scene.popMatrix();
     }
 }
