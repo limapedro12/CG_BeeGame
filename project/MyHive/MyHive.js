@@ -46,7 +46,32 @@ export class MyHive extends CGFobject {
         this.pollens = [];
 
 		this.initBuffers();
+
+        this.dx = 0;
+        this.dz = 0;
 	}
+
+    collideWith(obj, speed_vector) {
+        // console.log((obj.x - this.dx)*(obj.x - this.dx) + (obj.z - this.dz)*(obj.z - this.dz));
+        let new_x = obj.x + speed_vector[0];
+        let new_z = obj.z + speed_vector[1];
+
+        if(new_x < this.dx + 1 && new_x > this.dx - 1 && new_z > this.dz) {
+            return false;
+        }
+
+        let calc = (new_x - this.dx)*(new_x - this.dx) + (new_z - this.dz)*(new_z - this.dz);
+
+        if (calc < 36 && calc > 16) {
+            return true;
+        }
+        return false;
+    }
+
+    updatePos(x, z) {
+        this.dx += x;
+        this.dz += z;
+    }
 
 	updateBuffers() {}
 
