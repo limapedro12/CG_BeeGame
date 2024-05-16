@@ -32,6 +32,9 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'gardenLins', [1, 2, 3, 4, 5]).name('Garden lines');
         this.gui.add(this.scene, 'gardenCols', [1, 2, 3, 4, 5]).name('Garden columns');
 
+        // display normals
+        this.gui.add(this.scene, 'displayNormals').name('Display normals');
+
         this.initKeys();
 
         return true;

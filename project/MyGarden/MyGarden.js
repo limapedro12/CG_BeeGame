@@ -1,5 +1,7 @@
 import {CGFappearance, CGFobject} from '../../lib/CGF.js';
 import { MyFlower } from './Components/MyFlower.js';
+import { MyGrassFloor } from "./MyGrassFloor.js";
+
 /**
  * MyGarden
  * @constructor
@@ -26,6 +28,8 @@ export class MyGarden extends CGFobject {
         this.flowersHeight = [];
         this.maxHeight = 0;
 
+        this.grassFloor = new MyGrassFloor(this.scene, 50, 50);
+
         for (var i = 0; i < lines; i++) {
             for (var j = 0; j < cols; j++) {
                 let exteriorRadius = (Math.random() * 4 + 3)*0.5;
@@ -41,8 +45,8 @@ export class MyGarden extends CGFobject {
                 let leavesColor = null;
                 let flower = new MyFlower(scene, exteriorRadius, petalsNo, petalsColor, petalsAngleMin, petalsAngleMax, receptacleRadius, receptacleColor, stemRadius, stemSize, stemColor, leavesColor, i, j);
                 this.flowers.push(flower);
-                this.flowersXTrans.push(i*15 + (Math.random()*-5 + 5));
-                this.flowersZTrans.push(j*15 + (Math.random()*-5 + 5));
+                this.flowersXTrans.push(5 + i*10 + (Math.random()*-2.5 + 2.5));
+                this.flowersZTrans.push(5 + j*10 + (Math.random()*-2.5 + 2.5));
                 this.flowersRotate.push(Math.random()*Math.PI);
                 this.flowersHeight.push(flower.stem.height + receptacleRadius);
                 if (this.maxHeight < this.flowersHeight[i*cols + j]) {
@@ -68,6 +72,10 @@ export class MyGarden extends CGFobject {
                 }
             }
         }
+    }
+
+    update(t) {
+        this.grassFloor.update(t);
     }
 
     setLines(lines) {
@@ -100,5 +108,13 @@ export class MyGarden extends CGFobject {
                 this.scene.popMatrix();
             }
         }
+        
+        this.scene.setActiveShader(this.scene.grassShader);
+        this.grassFloor.grassList[0][0].texture.bind();
+        this.scene.pushMatrix();
+        this.scene.translate(0, -this.maxHeight, 0);
+        this.grassFloor.display();
+        this.scene.popMatrix();
+        this.scene.setActiveShader(this.scene.defaultShader);
     }
 }

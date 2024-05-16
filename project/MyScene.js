@@ -43,6 +43,7 @@ export class MyScene extends CGFscene {
 
     //Objects connected to MyInterface
     this.displayAxis = false;
+    this.displayNormals = false;
     this.speedFactor = 1;
     this.scaleFactor = 1;
     this.gardenLins = 5;
@@ -58,6 +59,8 @@ export class MyScene extends CGFscene {
     this.appearance.setSpecular(0.2, 0.2, 0.2, 1.0);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.grassShader = new CGFshader(this.gl, "shaders/grass.vert", "shaders/grass.frag");
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -105,6 +108,10 @@ export class MyScene extends CGFscene {
     this.checkKeys();
     if (this.enableAnimation) this.bee.update(t);
     this.panorama.update(t);
+    
+    this.garden.update(t);
+
+    this.grassShader.setUniformsValues({ timeFactor: t / 100 % 100 });
   }
   display() {
     // ---- BEGIN Background, camera and axis setup

@@ -4,8 +4,6 @@ import { MyRock } from './MyRock.js';
  * MyRockSet
  * @constructor
  * @param scene - Reference to MyScene object
- * @param petalsNo
- * @param receptacleRadius
  */
 export class MyRockSet extends CGFobject {
 	constructor(scene, numRocks, radius) {
