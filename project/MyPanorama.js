@@ -1,4 +1,4 @@
-import {CGFappearance, CGFobject} from '../lib/CGF.js';
+import {CGFappearance, CGFobject, CGFtexture, CGFshader} from '../lib/CGF.js';
 import { MySphere } from './MySphere.js';
 /**
  * MyPanorama
@@ -12,6 +12,7 @@ export class MyPanorama extends CGFobject {
 
         this.sphere = new MySphere(scene, 10, 10, 200, true);
 
+        this.texture = texture;
         this.material = new CGFappearance(scene);
         this.material.setAmbient(0, 0, 0, 1);
         this.material.setDiffuse(0, 0, 0, 1);
@@ -20,6 +21,11 @@ export class MyPanorama extends CGFobject {
         this.material.setShininess(10.0);
         this.material.setTexture(texture);
         this.material.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.cloudTexture = new CGFtexture(this.scene, "images/clouds.png");
+        this.cloudsShader = new CGFshader(this.scene.gl, "shaders/clouds.vert", "shaders/clouds.frag");
+
+        this.cloudsShader.setUniformsValues({ uSampler2: 1 });
 	}
 
 	updateBuffers() {}
@@ -27,12 +33,18 @@ export class MyPanorama extends CGFobject {
     enableNormalViz() {this.sphere.enableNormalViz();}
     disableNormalViz() {this.sphere.disableNormalViz();}
 
+    update(t) {
+        this.cloudsShader.setUniformsValues({ timeFactor: t/1000 % 1000 });
+    }
+
     display() {
+        this.scene.setActiveShader(this.cloudsShader);
+        this.cloudTexture.bind(1);
         this.scene.pushMatrix();
-        
         this.scene.translate(this.scene.camera.position[0], this.scene.camera.position[1], this.scene.camera.position[2]);
         this.material.apply();
         this.sphere.display();
         this.scene.popMatrix();
+        this.scene.setActiveShader(this.scene.defaultShader);
     }
 }

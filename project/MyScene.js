@@ -104,6 +104,7 @@ export class MyScene extends CGFscene {
   update(t) {
     this.checkKeys();
     if (this.enableAnimation) this.bee.update(t);
+    this.panorama.update(t);
   }
   display() {
     // ---- BEGIN Background, camera and axis setup
