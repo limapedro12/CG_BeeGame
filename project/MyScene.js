@@ -59,6 +59,10 @@ export class MyScene extends CGFscene {
     this.appearance.setSpecular(0.2, 0.2, 0.2, 1.0);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.hive_x = 28;
+    this.hive_z = -47;
+    this.hive.updatePos(this.hive_x, this.hive_z);
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -104,6 +108,8 @@ export class MyScene extends CGFscene {
   }
   update(t) {
     this.checkKeys();
+    if(this.bee.state != 5 && this.hive.collideWith(this.bee, this.bee.speed))
+      this.bee.reset_speed();
     if (this.enableAnimation) this.bee.update(t);
     this.panorama.update(t);
     
@@ -159,7 +165,7 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     this.pushMatrix();
-    this.translate(28, this.rockset.get_height() - 45, -47);
+    this.translate(this.hive_x, this.rockset.get_height() - 45, this.hive_z);
     this.rotate(Math.PI/2, 0, 1, 0);
     this.hive.display()
     this.popMatrix();
