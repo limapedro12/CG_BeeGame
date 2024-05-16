@@ -42,6 +42,8 @@ export class MyHive extends CGFobject {
         this.logInside = new MyCilinder(scene, 16, 8, 1, true);
 
         this.cover = new MyCover(scene);
+        
+        this.pollens = [];
 
 		this.initBuffers();
 	}
@@ -50,7 +52,7 @@ export class MyHive extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
-        this.scene.scale(5, 15, 5);
+        this.scene.scale(5, 20, 5);
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.insideAppearance.apply();
         this.logInside.display();
@@ -62,7 +64,7 @@ export class MyHive extends CGFobject {
             this.scene.translate(0, 0, 1);
             this.circle2.display();
         this.scene.popMatrix()
-
+        
         this.outsideAppearance.apply();
         this.logOutside.display();
 
@@ -72,5 +74,9 @@ export class MyHive extends CGFobject {
             this.scene.popMatrix();
 
         this.scene.popMatrix();
+    }
+
+    addPollen(pollen) {
+        this.pollens.push(pollen);
     }
 }

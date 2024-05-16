@@ -2,7 +2,7 @@ import {CGFappearance, CGFobject, CGFtexture} from '../lib/CGF.js';
 import { MyPetal } from './MyPetal.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyStem } from './MyStem.js';
-import { MyPolen } from "./MyPolen/MyPolen.js";
+import { MyPollen } from "./MyPollen/MyPollen.js";
 
 /**
  * MyFlower
@@ -68,9 +68,9 @@ export class MyFlower extends CGFobject {
 		this.receptacleAppearance.setTexture(this.receptacleTexture);
 		this.receptacleAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.polen = new MyPolen(scene, 1);
-        this.polenAngle1 = Math.random() * Math.PI/2 - Math.PI/4;
-        this.polenAngle2 = Math.random() * Math.PI/2 - Math.PI/4;
+        this.pollen = new MyPollen(scene, 1);
+        this.pollenAngle1 = Math.random() * Math.PI/2 - Math.PI/4;
+        this.pollenAngle2 = Math.random() * Math.PI/2 - Math.PI/4;
 	}
 
 	updateBuffers() {}
@@ -99,12 +99,14 @@ export class MyFlower extends CGFobject {
         this.receptacleAppearance.apply();
         this.receptacle.display();
 
-        this.scene.pushMatrix();
-        this.scene.rotate(this.polenAngle1, 0, 1, 1);
-        this.scene.translate(this.receptacleRadius, 0, 0);
-        this.scene.rotate(this.polenAngle2, 1, 0, 0);
-        this.polen.display();
-        this.scene.popMatrix();
+        if (this.pollen != null) {
+            this.scene.pushMatrix();
+            this.scene.rotate(this.pollenAngle1, 0, 1, 1);
+            this.scene.translate(this.receptacleRadius, 0, 0);
+            this.scene.rotate(this.pollenAngle2, 1, 0, 0);
+            this.pollen.display();
+            this.scene.popMatrix();
+        }
 
         this.scene.popMatrix();
 

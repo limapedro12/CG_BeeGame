@@ -6,29 +6,6 @@ import { MyRockSet } from "./MyRockSet.js";
 import { MyBee } from "./MyBee/MyBee.js";
 import { MyHive } from "./MyHive/MyHive.js";
 
-/*
-.setUpdatePedtiod(50)
-MyScene.update(t) {
-  bee.update(t)
-}
-
-MyBee.update(t) {
-  dy = v dt;
-  ...
-  Ltime = t;
-}
-
-construtor() {
-  variaveiis
-  estadoInicial
-}
-
-display() {
-  translate(posI + Deltapos)
-}
-
-*/
-
 /**
  * MyScene
  * @constructor
@@ -104,38 +81,25 @@ export class MyScene extends CGFscene {
     this.setShininess(10.0);
   }
   checkKeys() {
-    var text = "Keys pressed: ";
-    var keysPressed = false;
-
-    if (this.gui.isKeyPressed("KeyW")) {
-      text += " W ";
-      keysPressed = true;
-      this.bee.accelerate(this.speedFactor*0.1);
+    if (this.gui.isKeyPressed("KeyW")) this.bee.accelerate(this.speedFactor*0.1);
+    else if (this.gui.isKeyPressed("KeyS")) this.bee.accelerate(this.speedFactor*(-0.1));
+    else if (this.gui.isKeyPressed("KeyA")) this.bee.turn(this.speedFactor*0.1);
+    else if (this.gui.isKeyPressed("KeyD")) this.bee.turn(this.speedFactor*(-0.1));
+    else if (this.gui.isKeyPressed("KeyR")) this.bee.reset();
+    else if (this.gui.isKeyPressed("KeyF")) {
+      for (var i = 0; i < this.garden.flowers.length; i++) {
+        let flower = this.garden.flowers[i];
+        let flowerX = 40 + this.garden.flowersXTrans[i];
+        let flowerZ = this.garden.flowersZTrans[i];
+        let flowerHeight = this.garden.flowersHeight[i];
+        if (Math.abs(this.bee.x - flowerX) <= 2 && Math.abs(this.bee.z - flowerZ) <= 2) {
+          this.bee.descend(flower, 2 + flowerHeight - 75 + 47 - this.bee.height/2);
+          break;
+        }
+      }
     }
-
-    if (this.gui.isKeyPressed("KeyS")) {
-      text += " S ";
-      keysPressed = true;
-      this.bee.accelerate(this.speedFactor*(-0.1));
-    }
-
-    if (this.gui.isKeyPressed("KeyA")) {
-      text += " A ";
-      keysPressed = true;
-      this.bee.turn(this.speedFactor*0.1);
-    }
-
-    if (this.gui.isKeyPressed("KeyD")) {
-      text += " D ";
-      keysPressed = true;
-      this.bee.turn(this.speedFactor*(-0.1));
-    }
-
-    if (this.gui.isKeyPressed("KeyR")) {
-      text += " R ";
-      keysPressed = true;
-      this.bee.reset();
-    }
+    else if (this.gui.isKeyPressed("KeyP")) this.bee.climb();
+    else if (this.gui.isKeyPressed("KeyO")) this.bee.deliver(27.75,-42.5,this.hive);
   }
   update(t) {
     this.checkKeys();
@@ -184,19 +148,18 @@ export class MyScene extends CGFscene {
     this.garden.display();
     this.popMatrix();
 
-    // The bee should be the last element to be drawn!
     this.pushMatrix();
     this.translate(0, -47 + this.bee.height/2, 0);
-    this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+    this.bee.scaleFactor = this.scaleFactor;
     this.bee.display();
     this.popMatrix();
 
-    // ---- END Primitive drawing section
-
     this.pushMatrix();
-    this.translate(28, this.rockset.get_height() - 50, -47);
+    this.translate(28, this.rockset.get_height() - 45, -47);
     this.rotate(Math.PI/2, 0, 1, 0);
     this.hive.display()
     this.popMatrix();
+
+    // ---- END Primitive drawing section
   }
 }
