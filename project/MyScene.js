@@ -107,7 +107,7 @@ export class MyScene extends CGFscene {
   }
   update(t) {
     this.checkKeys();
-    if(this.hive.collideWith(this.bee, this.bee.speed))
+    if(this.bee.state != 5 && this.hive.collideWith(this.bee, this.bee.speed))
       this.bee.reset_speed();
     if (this.enableAnimation) this.bee.update(t);
   }
