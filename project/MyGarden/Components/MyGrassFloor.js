@@ -1,4 +1,4 @@
-import {CGFappearance, CGFobject} from '../lib/CGF.js';
+import {CGFappearance, CGFobject} from '../../../lib/CGF.js';
 import { MyGrass } from './MyGrass.js';
 /**
  * MyGrassFloor

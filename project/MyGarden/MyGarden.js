@@ -1,6 +1,6 @@
 import {CGFappearance, CGFobject} from '../../lib/CGF.js';
 import { MyFlower } from './Components/MyFlower.js';
-import { MyGrassFloor } from "./MyGrassFloor.js";
+import { MyGrassFloor } from "./Components/MyGrassFloor.js";
 
 /**
  * MyGarden
