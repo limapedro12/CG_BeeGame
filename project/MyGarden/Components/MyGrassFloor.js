@@ -2,10 +2,13 @@ import {CGFappearance, CGFobject, CGFshader, CGFtexture} from '../../../lib/CGF.
 import { MyGrass } from './MyGrass.js';
 /**
  * MyGrassFloor
+ * 
+ * Class representing a grass floor with 50x50 units covered with grass, that moves with the wind
+ * 
  * @constructor
  * @param scene - Reference to MyScene object
- * @param numGrassRow
- * @param receptacleRadius
+ * @param numGras, in the z axissRow - Number of grass leaves in a row
+ * @param numGrassCol - Number of grass leaves in a column
  */
 export class MyGrassFloor extends CGFobject {
 	constructor(scene, numGrassRow, numGrassCol) {
@@ -35,6 +38,12 @@ export class MyGrassFloor extends CGFobject {
         this.texture = new CGFtexture(this.scene, "images/grass.jpg");
 	}
 
+    /**
+     * This function is called 50 times per second
+     * It updates the random factor of each grass leaf
+     * 
+     * @param t - time since the application started (integer incressed 50 times per second)
+     */
     update(t) {
         for(var i = 0; i < this.grassList.length; i++) {
             for(var j = 0; j < this.grassList[i].length; j++) {
@@ -49,6 +58,9 @@ export class MyGrassFloor extends CGFobject {
 
 	updateBuffers() {}
 
+    /**
+     * Displays the grass floor
+     */
     display() {
         this.scene.setActiveShader(this.grassShader);
         this.texture.bind(0);

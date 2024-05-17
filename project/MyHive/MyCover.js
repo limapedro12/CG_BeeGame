@@ -4,6 +4,9 @@ import { MyCircle } from '../Geometric/MyCircle.js';
 
 /**
  * MyCover
+ * 
+ * Class representing the cover of the hive
+ * 
  * @constructor
  * @param scene - Reference to MyScene object
  */
@@ -30,6 +33,9 @@ export class MyCover extends CGFobject {
 
 	updateBuffers() {}
 
+    /**
+     * Display the cover of the hive
+     */
     display() {
         this.scene.pushMatrix();
         this.scene.scale(1.3, 1.3, this.height);

@@ -2,11 +2,14 @@ import {CGFobject} from '../../lib/CGF.js';
 
 /**
  * MyCilinder
+ * 
+ * Class representing a cilinder without top and bottom faces
+ * 
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices 
- * @param stacks 
- * @param radius
+ * @param slices - Number of slices around the cilinder
+ * @param stacks - Number of stacks the cilinder is divided along its height
+ * @param radius - Radius of the cilinder base
  */
 export class MyCilinder extends CGFobject {
 	constructor(scene, slices, stacks, radius, inverted = false) {
@@ -20,6 +23,10 @@ export class MyCilinder extends CGFobject {
 		this.initBuffers();
 	}
 
+	/**
+	 * Generates the vertices, indices, normals and texCoords
+	 * needed to draw the cilinder
+	 */
 	get_vertices() {
         for (var z = 0; z <= this.stacks; z++) {
             this.vertices.push(this.radius, 0, z / this.stacks);
@@ -91,6 +98,9 @@ export class MyCilinder extends CGFobject {
 		}
     }
 
+	/**
+	 * Initializes the cilinder buffers
+	 */
     initBuffers() {
 		this.vertices = [];
 		this.indices = [];

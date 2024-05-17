@@ -2,8 +2,18 @@ import {CGFappearance, CGFobject} from '../../lib/CGF.js';
 import { MyRock } from './MyRock.js';
 /**
  * MyRockSet
+ * 
+ * Class representing a set of rocks in a pyramid shape
+ * It tries to do a pyramid with the given number of rocks,
+ * but if it can't do a perfect pyramid, it will do the best it can
+ * 
+ * Possible numbers of rocks to achieve a perfect pyramid:
+ * 1, 5, 14, 30, 55, 91, ...
+ * 
  * @constructor
  * @param scene - Reference to MyScene object
+ * @param numRocks - Number of rocks in the set
+ * @param radius - Radius of the rocks (in x and z axis)
  */
 export class MyRockSet extends CGFobject {
 	constructor(scene, numRocks, radius) {
@@ -40,18 +50,10 @@ export class MyRockSet extends CGFobject {
     enableNormalViz() {}
     disableNormalViz() {}
 
+    /**
+     * Displays the set of rock set in a pyramid shape
+     */
     display() {
-        // var totalHeight = 0;
-        // for (var i = 0; i < this.numRocks; i++) {
-        //     this.scene.pushMatrix();
-        //     this.scene.translate(0, (this.rocks[i].height()*this.scales[i])/2, 0);
-        //     this.scene.translate(0, totalHeight, 0);
-        //     this.scene.rotate(this.angles[i], this.angles[i], this.angles[i], 0);
-        //     this.scene.scale(this.scales[i], this.scales[i], this.scales[i]);
-        //     this.rocks[i].display();
-        //     this.scene.popMatrix();
-        //     totalHeight += this.rocks[i].height()*this.scales[i];
-        // }
         var level = this.numLevels;
         var x = 0;
         var y = 0;
@@ -63,7 +65,6 @@ export class MyRockSet extends CGFobject {
             let i3 = this.rock_at(x, y + 1, z - 1)
             let i4 = this.rock_at(x + 1, y + 1, z - 1)
  
-            // console.log(i1, i2, i3)
             var angle1; var angle2;
             if(i1 == -1 || i2 == -1 || i3 == -1){
                 angle1 = 0
@@ -118,6 +119,15 @@ export class MyRockSet extends CGFobject {
         }
     }
 
+
+    /**
+     * Returns the index of the rock at position (x, y, z)
+     * @param x - x position
+     * @param y - y position
+     * @param z - z position
+     * 
+     * @return index of the rock at position (x, y, z)
+     */
     rock_at(x, y, z){
         if(x == -1 || y == -1 || z == -1){
             return -1;
@@ -132,10 +142,22 @@ export class MyRockSet extends CGFobject {
 
     }
 
+    /**
+     * Returns the angle between two rocks with different heights
+     * @param height1 - height of the first rock
+     * @param height2 - height of the second rock
+     * 
+     * @return angle between the two rocks in radians
+     */
     angle_from_heights(height1, height2) {
         return ((height1 - height2)/this.radius) * Math.PI/4;
     }
 
+    /**
+     * Returns the height of the rock set
+     * 
+     * @return height of the rock set
+     */
     get_height() {
         return this.rocks[this.rocks.length-1].height();
     }

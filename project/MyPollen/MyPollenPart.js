@@ -2,11 +2,15 @@ import { CGFappearance, CGFobject, CGFtexture } from '../../../lib/CGF.js';
 
 /**
  * MyPollen
+ * 
+ * Class representing half of a pollen grain
+ * The half pollen grain is a half sphere with the pollen texture
+ * 
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices 
- * @param stacks 
- * @param radius
+ * @param slices - Number of slices around the x and z axis
+ * @param stacks - Number of stacks around the y axis
+ * @param radius - Radius of the pollen grain
  */
 export class MyPollenPart extends CGFobject {
 	constructor(scene, slices, stacks, radius) {
@@ -26,6 +30,10 @@ export class MyPollenPart extends CGFobject {
 		this.initBuffers();
 	}
 	
+    /**
+     * Generates the vertices, indices, normals and texCoords
+     * needed to draw the half pollen grain
+     */
 	get_vertices() {
         for(var stack = 0; stack <= this.stacks; stack++) {
             let delta_alpha = stack * Math.PI / (this.stacks*2);
@@ -58,6 +66,9 @@ export class MyPollenPart extends CGFobject {
         }
     }
 
+    /**
+     * Initializes the pollen grain buffers
+     */
 	initBuffers() {
 		this.vertices = [];
 		this.indices = [];
@@ -72,6 +83,9 @@ export class MyPollenPart extends CGFobject {
 
 	updateBuffers() {}
 
+    /**
+     * Display the half pollen grain
+     */
     display() {
         this.appearance.apply();
         super.display();

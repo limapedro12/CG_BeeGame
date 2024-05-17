@@ -3,8 +3,13 @@ import { MyPollenPart } from './MyPollenPart.js';
 
 /**
  * MyPollen
+ * 
+ * Class representing a single pollen grain
+ * The pollen grain is composed of two parts: a bottom part and a top part
+ * The top part is an elongated half sphere, while the bottom part is a half sphere
+ * 
  * @constructor
- * @param size
+ * @param height - Height of the pollen grain
  */
 export class MyPollen extends CGFobject {
 	constructor(scene, height) {
@@ -18,6 +23,9 @@ export class MyPollen extends CGFobject {
 
 	updateBuffers() {}
 
+    /**
+     * Display the pollen grain
+     */
     display() {
         this.scene.pushMatrix();
         this.scene.scale(1, 1.5, 1);

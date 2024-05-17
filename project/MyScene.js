@@ -106,6 +106,14 @@ export class MyScene extends CGFscene {
     else if (this.gui.isKeyPressed("KeyP")) this.bee.climb();
     else if (this.gui.isKeyPressed("KeyO")) this.bee.deliver(27.75,-42.5,this.hive);
   }
+
+  /**
+     * This function is called 50 times per second
+     * It then passes the t value to all other objects that change with time
+     * and calls all the functions that need to be updtated regularly
+     * 
+     * @param t - time since the application started (integer incressed 50 times per second)
+     */
   update(t) {
     this.checkKeys();
     if(this.bee.state != 5 && this.hive.collideWith(this.bee, this.bee.speed))

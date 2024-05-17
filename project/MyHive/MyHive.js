@@ -5,6 +5,9 @@ import { MyCover } from './MyCover.js';
 
 /**
  * MyHive
+ * 
+ * Class representing a hive
+ * 
  * @constructor
  * @param scene - Reference to MyScene object
  */
@@ -51,6 +54,13 @@ export class MyHive extends CGFobject {
         this.dz = 0;
 	}
 
+    /**
+     * Check if the hive collides with the given object
+     * 
+     * @param obj - Object to check collision with
+     * @param speed_vector - Speed vector of the object
+     * @return true if the object collides with the hive, false otherwise
+     */
     collideWith(obj, speed_vector) {
         // console.log((obj.x - this.dx)*(obj.x - this.dx) + (obj.z - this.dz)*(obj.z - this.dz));
         let new_x = obj.x + speed_vector[0];
@@ -68,6 +78,12 @@ export class MyHive extends CGFobject {
         return false;
     }
 
+    /**
+     * Update the internal representation of the position of the hive
+     * 
+     * @param x - x coordinate of the hive
+     * @param z - z coordinate of the hive
+     */
     updatePos(x, z) {
         this.dx += x;
         this.dz += z;
@@ -75,6 +91,9 @@ export class MyHive extends CGFobject {
 
 	updateBuffers() {}
 
+    /**
+     * Display the hive
+     */
     display() {
         this.scene.pushMatrix();
         this.scene.scale(5, 20, 5);
@@ -101,6 +120,9 @@ export class MyHive extends CGFobject {
         this.scene.popMatrix();
     }
 
+    /**
+     * Add a pollen grain to the hive
+     */
     addPollen(pollen) {
         this.pollens.push(pollen);
     }

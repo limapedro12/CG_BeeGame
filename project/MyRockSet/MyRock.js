@@ -1,11 +1,17 @@
 import { CGFappearance, CGFobject, CGFtexture } from '../../../lib/CGF.js';
 /**
  * MyRock
+ * 
+ * Class representing a single rock
+ * The rock is a flattened sphere with each vertex randomly displaced
+ * Also its height is randomly generated, between 0.2 and 0.7 times the radius
+ * In x and z axis the rock has a radius of radius
+ * 
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices 
- * @param stacks 
- * @param radius
+ * @param slices  - Number of slices around the x and z axis
+ * @param stacks - Number of stacks around the y axis
+ * @param radius - Radius of the rock (in x and z axis)
  */
 export class MyRock extends CGFobject {
 	constructor(scene, radius) {
@@ -28,6 +34,10 @@ export class MyRock extends CGFobject {
 		this.initBuffers();
 	}
 	
+    /**
+     * Generates the vertices, indices, normals and texCoords
+     * needed to draw the rock
+     */
 	get_vertices() {
         for(var stack = 0; stack <= this.stacks; stack++) {
             let delta_alpha = stack * Math.PI / this.stacks;
@@ -68,6 +78,9 @@ export class MyRock extends CGFobject {
         }
     }
 
+    /**
+     * Initializes the rock buffers
+     */
 	initBuffers() {
 		this.vertices = [];
 		this.indices = [];
@@ -84,10 +97,17 @@ export class MyRock extends CGFobject {
 
 	updateBuffers() {}
 
+    /**
+     * Returns the height of the rock
+     * @returns height of the rock
+     */
     height() {
         return (this.vertices[this.vertices.length - 2] - this.vertices[1]) * this.height_factor;
     }
 
+    /**
+     * Displays the rock
+     */
     display() {
         this.material.apply();
         this.scene.pushMatrix();
