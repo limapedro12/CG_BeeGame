@@ -1,2 +1,17 @@
-- Ajeitar vértices MyCilinder
-- Colocar tag flores
+Documentação:
+
+- Geometric
+- MyBee
+- MyGarden
+    - MyFlower OK
+    - MyGrass
+    - MyLeaf OK
+    - MyPetal OK
+    - MyReceptacle OK
+    - MyStem OK
+- MyHive OK
+- MyPollen OK
+- MyRockSet OK
+- MyInterface.js OK
+- MyPanorama.js OK
+- MyScene.js OK

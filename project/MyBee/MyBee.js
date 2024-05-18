@@ -78,9 +78,6 @@ export class MyBee extends CGFobject {
             this.y += 0.5*this.height*Math.sin(t/200);
 
             if (Math.abs(this.x - this.targetX) <= 0.1 && Math.abs(this.z - this.targetZ) <= 0.1) {
-                this.x += this.speed[0];
-                this.z += this.speed[1];
-            } else {
                 this.targetHive.addPollen(this.pollen);
                 this.pollen = null;
 
@@ -88,6 +85,9 @@ export class MyBee extends CGFobject {
                 this.turn(Math.PI);
 
                 this.state = 0;
+            } else {
+                this.x += this.speed[0];
+                this.z += this.speed[1];
             }
         }
     }

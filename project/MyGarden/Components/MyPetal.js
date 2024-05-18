@@ -4,7 +4,8 @@ import { MyTriangle } from '../../Geometric/MyTriangle.js';
  * MyPetal
  * @constructor
  * @param scene - Reference to MyScene object
- * @param radius
+ * @param radius - Petal's radius
+ * @param angle - Angle between the two triangles that form the petal
  */
 export class MyPetal extends CGFobject {
 	constructor(scene, radius, angle) {

@@ -8,24 +8,18 @@ import { MyPollen } from "../../MyPollen/MyPollen.js";
  * MyFlower
  * @constructor
  * @param scene - Reference to MyScene object
- * @param petalsNo
- * @param receptacleRadius
+ * @param exteriorRadius - Flower's exterior radius
+ * @param petalsNo - Number of petals
+ * @param petalsColor - Petals' color
+ * @param petalsAngleMin - Minimum angle between the petals and the receptacle
+ * @param petalsAngleMax - Maximum angle between the petals and the receptacle
+ * @param receptacleRadius - Receptacle's radius
+ * @param receptacleColor - Receptacle's color
+ * @param stemRadius - Stem's radius
+ * @param stemSize - Stem's size
+ * @param stemColor - Stem's color
+ * @param leavesColor - Leaves' color
  */
-
-/*
-    Raio exterior da flor
-    Número de pétalas
-    Côr das pétalas
-
-    Raio do círculo do coração da flor
-    Côr do círculo do coração da flor
-
-    Raio do cilindro do caule
-    Tamanho do caule (número de cilindros do caule)
-    Côr do caule
-
-    Côr das folhas
-*/
 export class MyFlower extends CGFobject {
 	constructor(
         scene,

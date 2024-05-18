@@ -4,7 +4,7 @@ import { MySphere } from './Geometric/MySphere.js';
  * MyPanorama
  * @constructor
  * @param scene - Reference to MyPanorama object
- * @param texture
+ * @param texture - Texture to be used
  */
 export class MyPanorama extends CGFobject {
 	constructor(scene, texture) {
@@ -33,6 +33,10 @@ export class MyPanorama extends CGFobject {
     enableNormalViz() {this.sphere.enableNormalViz();}
     disableNormalViz() {this.sphere.disableNormalViz();}
 
+    /**
+     * Passes the given time factor to the clouds shader, in order to update their position.
+     * @param t - Time factor
+     */
     update(t) {
         this.cloudsShader.setUniformsValues({ timeFactor: t/1000 % 1000 });
     }
