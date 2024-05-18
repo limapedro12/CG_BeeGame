@@ -85,6 +85,9 @@ export class MyScene extends CGFscene {
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+  /**
+   * Checks key pressing and invokes corresponding actions of the bee.
+   */
   checkKeys() {
     if (this.gui.isKeyPressed("KeyW")) this.bee.accelerate(this.speedFactor*0.1);
     else if (this.gui.isKeyPressed("KeyS")) this.bee.accelerate(this.speedFactor*(-0.1));
@@ -136,11 +139,6 @@ export class MyScene extends CGFscene {
 
     // Draw axis
     if (this.displayAxis) this.axis.display();
-
-    // if (this.displayNormals)
-    //   this.panorama.enableNormalViz();
-    // else
-    //   this.panorama.disableNormalViz();
 
     // ---- BEGIN Primitive drawing section
 
