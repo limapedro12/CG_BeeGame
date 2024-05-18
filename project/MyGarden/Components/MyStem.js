@@ -5,8 +5,8 @@ import { MyLeaf } from './MyLeaf.js';
  * MyStem
  * @constructor
  * @param scene - Reference to MyScene object
- * @param radius
- * @param nCilinders
+ * @param radius - Stem's radius
+ * @param nCilinders - Number of cilinders that compose the stem
  */
 export class MyStem extends CGFobject {
 	constructor(scene, radius, nCilinders) {
@@ -67,7 +67,10 @@ export class MyStem extends CGFobject {
 	}
 	
 	display() {
-        var heightSum = 0;
+        var heightSum = 0; 
+        /* Accumulates the cilinder stack height, in order to translate the subsequent
+        cilinders and leaves. */
+
         for (var i = 0; i < this.nCilinders; i++) {
             let cilinder = this.cilinders[i];
             let height = this.cilindersHeights[i];

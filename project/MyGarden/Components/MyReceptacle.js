@@ -1,11 +1,13 @@
 import {CGFobject} from '../../../lib/CGF.js';
 /**
  * MyReceptacle
+ * Adaptation of MySphere
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices 
- * @param stacks 
- * @param radius
+ * @param slices - Number of the sphere's slices
+ * @param stacks - Number of the sphere's stacks
+ * @param radius - Sphere's radius
+ * @param inverted - Whether the sphere is to be observed from the inside or the outside. Inherited from the sphere class, irrelevant to receptacle.
  */
 export class MyReceptacle extends CGFobject {
 	constructor(scene, slices, stacks, radius, inverted = false) {

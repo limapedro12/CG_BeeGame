@@ -5,10 +5,10 @@ import { MyCilinder } from '../../Geometric/MyCilinder.js';
  * MyLeaf
  * @constructor
  * @param scene - Reference to MyScene object
- * @param stemRadius
- * @param stemSize
- * @param leafRadius
- * @param leafAngle
+ * @param stemRadius - Radius of the stem
+ * @param stemSize - Size of the stem
+ * @param leafRadius - Radius of the leaf
+ * @param leafAngle - Angle of rotation of the leaf in relation to the stem
  */
 export class MyLeaf extends CGFobject {
 	constructor(scene, stemRadius, stemSize, leafRadius, leafAngle) {
