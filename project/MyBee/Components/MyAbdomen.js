@@ -4,8 +4,10 @@ import { MyCone } from '../../Geometric/MyCone.js';
 
 /**
  * MyAbdomen
+ * Represents the abdomen of the bee
  * @constructor
- * @param size
+ * @param scene - Reference to MyScene object
+ * @param height - height of the bee
  */
 export class MyAbdomen extends CGFobject {
 	constructor(scene, height) {

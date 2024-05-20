@@ -1,6 +1,7 @@
 import {CGFobject} from '../../lib/CGF.js';
 /**
  * MyTriangle
+ * Represents a triangle
  * @constructor
  * @param scene - Reference to MyScene object
  */

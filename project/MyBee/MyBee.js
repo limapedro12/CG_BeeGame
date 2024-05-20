@@ -6,7 +6,13 @@ import { MyAbdomen } from './Components/MyAbdomen.js';
 /**
  * MyBee
  * @constructor
- * @param size
+ * @param scene - Reference to MyScene object
+ * @param height - height of the bee
+ * @param x - initial x position
+ * @param y - initial y position
+ * @param z - initial z position
+ * @param orientation - initial orientation (radians, in XZ plane)
+ * @param speed - initial speed in XZ plane
  */
 export class MyBee extends CGFobject {
 	constructor(scene, height, x, y, z, orientation, speed) {
@@ -50,6 +56,11 @@ export class MyBee extends CGFobject {
 
 	updateBuffers() {}
 
+    /**
+     * Update bee's position and state, as well as invoking a function to update the torax, which will 
+     * is responsible for the wings' movement, based on a received time factor, the speed, and the state.
+     * @param t - time factor
+     */
     update(t) {
         if (this.state == 0 || this.state == 4) {
             this.y = 0.5*this.height*Math.sin(t/200);
@@ -92,6 +103,10 @@ export class MyBee extends CGFobject {
         }
     }
 
+    /**
+     * If in free flight, turns the bee's orientation by a given angle, and updates the speed vector.
+     * @param v - angle in radians
+     */
     turn(v) {
         if (this.state != 0 && this.state != 4) return;
 
@@ -102,6 +117,10 @@ export class MyBee extends CGFobject {
         this.speed = [norm*Math.sin(this.orientation), norm*Math.cos(this.orientation)];
     }
 
+    /**
+     * If in free flight, accelerates the bee by a given value, keeping the orientation.
+     * @param v - acceleration value
+     */
     accelerate(v) {
         if (this.state != 0 && this.state != 4) return;
 
@@ -113,6 +132,11 @@ export class MyBee extends CGFobject {
         this.speed = [0, 0];
     }
 
+    /**
+     * If above a flower and carrying no pollen, descends to it.
+     * @param flower - flower to descend to
+     * @param height - height to descend to
+     */
     descend(flower, height) {
         if (this.state != 0) return;
 
@@ -123,6 +147,9 @@ export class MyBee extends CGFobject {
         this.state = 1;
     }
 
+    /**
+     * If on a flower, climbs back to free flight.
+     */
     climb() {
         if (this.state != 2) return;
 
@@ -133,6 +160,12 @@ export class MyBee extends CGFobject {
         this.state = 3;
     }
 
+    /**
+     * If in free flight and carrying pollen, delivers it to a hive.
+     * @param x - x coordinate of the hive
+     * @param z - z coordinate of the hive
+     * @param hive - hive to deliver the pollen to
+     */
     deliver(x, z, hive) {
         if (this.state != 4) return;
 
@@ -148,6 +181,9 @@ export class MyBee extends CGFobject {
         this.state = 5;
     }
 
+    /**
+     * Resets the bee's position, speed and orientation if in free flight.
+     */
     reset() {
         if (this.state != 0 && this.state != 4) return;
         this.x = 0;

@@ -1,9 +1,11 @@
 import {CGFobject} from '../../lib/CGF.js';
 /**
  * MyCircle
+ * Models a circle
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices
+ * @param slices - number of slices around the circle
+ * @param radius - radius of the circle
  */
 export class MyCircle extends CGFobject {
 	constructor(scene, slices, radius) {

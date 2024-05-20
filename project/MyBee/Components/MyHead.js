@@ -4,8 +4,10 @@ import { MyAntennaLegs } from './MyAntennaLegs.js';
 
 /**
  * MyHead
+ * Models a bee's head
  * @constructor
- * @param size
+ * @param scene - Reference to MyScene object
+ * @param height - height of the bee
  */
 export class MyHead extends CGFobject {
 	constructor(scene, height) {

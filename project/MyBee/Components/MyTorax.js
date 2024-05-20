@@ -5,8 +5,10 @@ import { MyWing } from './MyWing.js';
 
 /**
  * MyTorax
+ * Represents the torax of the bee, which includes the legs and wings
  * @constructor
- * @param size
+ * @param scene - Reference to MyScene object
+ * @param height - height of the bee
  */
 export class MyTorax extends CGFobject {
 	constructor(scene, height) {
@@ -35,6 +37,10 @@ export class MyTorax extends CGFobject {
 
 	updateBuffers() {}
     
+    /**
+     * Updates the angles formed in the junctions of the wings with the torax core, based on a time factor.
+     * @param t - time factor
+     */
     update(t) {
         this.wingAngle = Math.PI/4*Math.sin(t/80);
     }

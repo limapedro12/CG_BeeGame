@@ -1,11 +1,13 @@
 import {CGFobject} from '../../lib/CGF.js';
 /**
  * MySphere
+ * Represents a sphere, with the possibility of specifying if it is to be seen from the inside or the outside
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices 
- * @param stacks 
- * @param radius
+ * @param slices - number of slices around the sphere
+ * @param stacks - number of stacks along the sphere
+ * @param radius - radius of the sphere
+ * @param inverted - boolean that specifies whether the sphere is to be seen from the inside
  */
 export class MySphere extends CGFobject {
 	constructor(scene, slices, stacks, radius, inverted = false) {

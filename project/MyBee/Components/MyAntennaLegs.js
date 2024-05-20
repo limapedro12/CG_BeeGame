@@ -3,8 +3,10 @@ import { MySphere } from '../../Geometric/MySphere.js';
 
 /**
  * MyAntennaLegs
+ * Used to model antennas and legs of a bee
  * @constructor
- * @param size
+ * @param scene - Reference to MyScene object
+ * @param height - height of the bee
  */
 export class MyAntennaLegs extends CGFobject {
 	constructor(scene, height) {

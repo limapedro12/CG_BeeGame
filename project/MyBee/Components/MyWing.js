@@ -3,6 +3,7 @@ import { MyCilinder } from '../../Geometric/MyCilinder.js';
 import { MyCircle } from '../../Geometric/MyCircle.js';
 /**
  * MyWing
+ * Represents a bee's wing
  * @constructor
  * @param scene - Reference to MyScene object
  * @param height - height of the bee
